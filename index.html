@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TRIG STUDIO – Works</title>
+  <style>
+    /* ====== RESET & BASE ====== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif;
+      background: #0b0b0b;
+      color: #f5f5f5;
+      line-height: 1.6;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* ====== HEADER ====== */
+    header {
+      border-bottom: 1px solid #2b2b2b;
+      padding: 16px 0 12px;
+      background: #000;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .logo {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .logo small {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      margin-top: 4px;
+      opacity: 0.6;
+    }
+
+    /* ====== SECTION TITLE BAR ====== */
+    .section-title-bar {
+      border-bottom: 1px solid #2b2b2b;
+      padding: 12px 0;
+      background: #050505;
+    }
+    .section-title-bar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+    .section-title-main {
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .section-title-sub {
+      opacity: 0.6;
+    }
+
+    /* ====== CATEGORY TABS ====== */
+    .category-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #2b2b2b;
+      background: #050505;
+    }
+    .category-tab {
+      flex: 1 1 50%;
+      min-width: 140px;
+      padding: 10px 16px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border-top: 1px solid #2b2b2b;
+      border-right: 1px solid #2b2b2b;
+      background: #050505;
+      color: #d0d0d0;
+      text-align: left;
+      cursor: pointer;
+      position: relative;
+    }
+    .category-tab:nth-child(2n) {
+      border-right: none;
+    }
+    .category-tab span {
+      display: block;
+    }
+    .category-tab small {
+      display: block;
+      margin-top: 2px;
+      opacity: 0.6;
+      font-size: 10px;
+    }
+    .category-tab.active {
+      background: #f5f5f5;
+      color: #111;
+      font-weight: 600;
+    }
+    .category-tab.active::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      width: 100%;
+      background: #111;
+    }
+
+    /* ====== WORKS GRID (上方卡片區) ====== */
+    .works-grid {
+      padding: 20px 0 28px;
+    }
+    .works-grid-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
+    }
+    @media (min-width: 720px) {
+      .works-grid-inner {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+    .work-card {
+      background: #111;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #2b2b2b;
+      display: flex;
+      flex-direction: column;
+      min-height: 240px;
+    }
+    .work-card-thumb {
+      aspect-ratio: 4 / 5;
+      background: #1e1e1e;
+      overflow: hidden;
+    }
+    .work-card-body {
+      padding: 12px 14px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+    }
+    .work-card-title {
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .work-card-desc {
+      font-size: 11px;
+      opacity: 0.8;
+    }
+    .work-card-meta {
+      font-size: 11px;
+      opacity: 0.7;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .work-card-link {
+      margin-top: 6px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      opacity: 0.8;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ====== CASE LIST (中間長條介紹區) ====== */
+    .case-list {
+      border-top: 1px solid #2b2b2b;
+      padding: 20px 0 40px;
+      background: #050505;
+    }
+    .case-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 18px;
+      padding: 20px 0;
+      border-bottom: 1px solid #2b2b2b;
+    }
+    @media (min-width: 720px) {
+      .case-item {
+        grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+        align-items: center;
+      }
+    }
+    .case-thumb {
+      background: #111;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .case-content-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      opacity: 0.7;
+      margin-bottom: 2px;
+    }
+    .case-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .case-meta {
+      font-size: 11px;
+      opacity: 0.7;
+      margin-bottom: 8px;
+    }
+    .case-desc {
+      font-size: 13px;
+      opacity: 0.9;
+      margin-bottom: 10px;
+    }
+    .case-extra {
+      font-size: 11px;
+      opacity: 0.7;
+      margin-bottom: 10px;
+    }
+    .case-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      opacity: 0.8;
+    }
+    .case-more::after {
+      content: "→";
+      font-size: 12px;
+    }
+
+    /* ====== FOOTER ====== */
+    footer {
+      margin-top: auto;
+      border-top: 1px solid #2b2b2b;
+      padding: 24px 0 16px;
+      background: #000;
+      font-size: 11px;
+    }
+    .footer-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
+      align-items: flex-start;
+    }
+    @media (min-width: 720px) {
+      .footer-inner {
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+      }
+    }
+    .footer-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .footer-contact p {
+      margin: 2px 0;
+      opacity: 0.8;
+    }
+    .footer-logo {
+      text-align: center;
+      opacity: 0.9;
+    }
+    .footer-logo svg {
+      width: 90px;
+      height: auto;
+      margin: 0 auto 6px;
+    }
+    .footer-bottom {
+      margin-top: 16px;
+      padding-top: 8px;
+      border-top: 1px solid #2b2b2b;
+      text-align: center;
+      opacity: 0.6;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+  </style>
+</head>
+<body class="page">
+  <!-- HEADER -->
+  <header>
+    <div class="wrap">
+      <div class="logo">
+        TRIG STUDIO
+        <small>VISUAL DESIGN & IDENTITY</small>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION TITLE (對應紅框標題列) -->
+  <section class="section-title-bar">
+    <div class="wrap">
+      <div class="section-title-bar-inner">
+        <div class="section-title-main">WORKS / 作品集</div>
+        <div class="section-title-sub">VISUAL IDENTITY · BRANDING · WEB</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORY TABS（可之後接 JS 做篩選） -->
+  <nav class="category-tabs">
+    <button class="category-tab active">
+      <span>視覺識別</span>
+      <small>Visual Identity</small>
+    </button>
+    <button class="category-tab">
+      <span>包裝設計</span>
+      <small>Packaging</small>
+    </button>
+    <button class="category-tab">
+      <span>網頁設計</span>
+      <small>Web Design</small>
+    </button>
+    <button class="category-tab">
+      <span>其他專案</span>
+      <small>Campaign / Print</small>
+    </button>
+  </nav>
+
+  <!-- WORKS GRID（上方卡片區） -->
+  <main>
+    <section class="works-grid">
+      <div class="wrap">
+        <div class="works-grid-inner">
+
+          <!-- 卡片 1 -->
+          <article class="work-card">
+            <div class="work-card-thumb">
+              <!-- 替換成你的專案封面圖 -->
+              <img src="images/work-vi-01.jpg" alt="VI設計案例 01">
+            </div>
+            <div class="work-card-body">
+              <div class="work-card-title">VI 設計是什麼？</div>
+              <div class="work-card-desc">
+                以極簡白色瓶身為主角，透過光影與材質表現品牌的純粹與專業。
+              </div>
+              <div class="work-card-meta">
+                <span>Visual Identity</span>
+                <span>2024</span>
+              </div>
+              <div class="work-card-link">
+                View project
+              </div>
+            </div>
+          </article>
+
+          <!-- 卡片 2 -->
+          <article class="work-card">
+            <div class="work-card-thumb">
+              <img src="images/work-vi-02.jpg" alt="VI設計案例 02">
+            </div>
+            <div class="work-card-body">
+              <div class="work-card-title">日光色塊系列視覺</div>
+              <div class="work-card-desc">
+                透過霧面玻璃與色塊堆疊，構成品牌獨特的時間感與節奏。
+              </div>
+              <div class="work-card-meta">
+                <span>Visual Identity</span>
+                <span>2023</span>
+              </div>
+              <div class="work-card-link">
+                View project
+              </div>
+            </div>
+          </article>
+
+          <!-- 卡片 3 -->
+          <article class="work-card">
+            <div class="work-card-thumb">
+              <img src="images/work-vi-03.jpg" alt="VI設計案例 03">
+            </div>
+            <div class="work-card-body">
+              <div class="work-card-title">LOGO 延伸應用提案</div>
+              <div class="work-card-desc">
+                以單一物件與多重背景組合，模擬品牌於不同媒介的視覺延伸。
+              </div>
+              <div class="work-card-meta">
+                <span>Visual Identity</span>
+                <span>2022</span>
+              </div>
+              <div class="work-card-link">
+                View project
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE LIST（中間長條介紹區） -->
+    <section class="case-list">
+      <div class="wrap">
+
+        <!-- 單一案例 1 -->
+        <article class="case-item">
+          <div class="case-thumb">
+            <img src="images/case-vi-01.jpg" alt="VI設計是什麼？案例圖">
+          </div>
+          <div>
+            <div class="case-content-tag">CASE 01 · VISUAL IDENTITY</div>
+            <h2 class="case-title">VI 設計是什麼？</h2>
+            <div class="case-meta">客戶產業：保養品牌｜服務內容：識別系統建立 · 影像風格定義</div>
+            <p class="case-desc">
+              對於新創保養品牌而言，視覺識別不只是 Logo，而是一整套「被看見的語言」。
+              在本案中，我們以白色瓶身作為主體，透過光線、材質與比例，讓產品在靜物照片中就能被記住。
+            </p>
+            <p class="case-extra">
+              我們為品牌規劃了完整的影像風格手冊，從電商頁面到實體展示，都能保持一致的視覺節奏，
+              讓品牌在不同觸點中保持同一個聲音。
+            </p>
+            <a href="#" class="case-more">Read more</a>
+          </div>
+        </article>
+
+        <!-- 單一案例 2 -->
+        <article class="case-item">
+          <div class="case-thumb">
+            <img src="images/case-vi-02.jpg" alt="色塊系列視覺案例圖">
+          </div>
+          <div>
+            <div class="case-content-tag">CASE 02 · VISUAL IDENTITY</div>
+            <h2 class="case-title">日光色塊系列視覺</h2>
+            <div class="case-meta">客戶產業：生活選物店｜服務內容：主視覺 · 展場物料</div>
+            <p class="case-desc">
+              品牌希望傳達「在日常裡留下一塊自己的時間」。我們以柔和的幾何色塊與玻璃折射，
+              設計出一組可以自由拆解、重組的視覺系統。
+            </p>
+            <p class="case-extra">
+              此套視覺應用於品牌開幕活動、線上宣傳素材以及社群版型，
+              讓品牌在短時間內建立起鮮明又溫度感的第一印象。
+            </p>
+            <a href="#" class="case-more">Read more</a>
+          </div>
+        </article>
+
+        <!-- 單一案例 3 -->
+        <article class="case-item">
+          <div class="case-thumb">
+            <img src="images/case-vi-03.jpg" alt="LOGO 延伸應用案例圖">
+          </div>
+          <div>
+            <div class="case-content-tag">CASE 03 · VISUAL IDENTITY</div>
+            <h2 class="case-title">LOGO 延伸應用提案</h2>
+            <div class="case-meta">客戶產業：設計工作室｜服務內容：識別優化 · 應用規範</div>
+            <p class="case-desc">
+              在既有 Logo 不更動的前提下，我們透過影像與版面規則，讓視覺系統更完整。
+              以單一物件搭配多層背景，形成可持續使用的視覺模組。
+            </p>
+            <p class="case-extra">
+              從名片、簡報模板到社群貼文，我們為客戶建立了一組容易被團隊內部沿用的設計框架，
+              減少每次重新排版的成本。
+            </p>
+            <a href="#" class="case-more">Read more</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER（底部＋三角形 Logo 區） -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-contact">
+          <div class="footer-title">TRIG STUDIO</div>
+          <p>Brand & Visual Identity Studio</p>
+          <p>E / hello@trig-studio.com</p>
+          <p>IG / @trig.studio</p>
+          <p>Based in Taipei, Taiwan</p>
+        </div>
+        <div class="footer-logo">
+          <!-- 這裡用簡單的 SVG 當三角形 LOGO，你可以換成自己的圖 -->
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <polygon points="50,8 4,92 96,92" fill="none" stroke="#f5f5f5" stroke-width="1" />
+            <circle cx="50" cy="25" r="4" fill="#f5f5f5" />
+            <circle cx="32" cy="55" r="4" fill="#f5f5f5" />
+            <circle cx="68" cy="55" r="4" fill="#f5f5f5" />
+            <circle cx="22" cy="80" r="3" fill="#f5f5f5" />
+            <circle cx="50" cy="80" r="3" fill="#f5f5f5" />
+            <circle cx="78" cy="80" r="3" fill="#f5f5f5" />
+          </svg>
+          <div>TRIG STUDIO / Visual Identity</div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © 2025 TRIG STUDIO. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
