@@ -5,85 +5,143 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TRIG STUDIO – Works</title>
 
-  <!-- ====== Base Style ====== -->
   <style>
     *, *::before, *::after { box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       margin: 0;
-      background: #0b0b0b;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Noto Sans TC", sans-serif;
+      background: #050505;
       color: #f5f5f5;
-      font-family: 'Inter', 'Noto Sans TC', sans-serif;
       overflow-x: hidden;
     }
-    img { width: 100%; display: block; }
+    img { max-width: 100%; display: block; }
 
-    /* smooth scroll */
-    html { scroll-behavior: smooth; }
-
-    /* ===== Header ===== */
-    header {
-      padding: 24px 0;
-      border-bottom: 1px solid #1f1f1f;
-      position: sticky;
-      top: 0;
-      background: rgba(0,0,0,0.72);
-      backdrop-filter: blur(6px);
-      z-index: 10;
-    }
     .wrap {
       width: 100%;
       max-width: 1080px;
-      margin: auto;
+      margin: 0 auto;
       padding: 0 18px;
     }
+
+    /* ========== HEADER ========== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(0,0,0,0.82);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #1e1e1e;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
     .logo {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 800;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.18em;
     }
-
-    /* ===== Title Section ===== */
-    .section-header {
-      padding: 36px 0 24px;
-      border-bottom: 1px solid #1f1f1f;
-    }
-    .section-header h1 {
-      font-size: 22px;
-      letter-spacing: 0.2em;
-      margin: 0 0 6px;
-    }
-    .section-header p {
-      font-size: 12px;
+    .logo-sub {
+      display: block;
+      font-size: 11px;
       opacity: 0.6;
-      letter-spacing: 0.13em;
-      margin: 0;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
+      margin-top: 3px;
+    }
+    .nav-line {
+      height: 1px;
+      background: linear-gradient(90deg, #f5f5f5, #444);
+      transform-origin: left;
     }
 
-    /* ===== Category Tabs ===== */
+    /* ========== HERO / TITLE ========== */
+    .hero {
+      position: relative;
+      padding: 48px 0 32px;
+      border-bottom: 1px solid #1e1e1e;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      opacity: 0.25;
+      background: radial-gradient(circle at 20% 0, #ffffff18 0, transparent 55%),
+                  radial-gradient(circle at 80% 100%, #ffffff10 0, transparent 60%);
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-kicker {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 10px;
+    }
+    .hero-title {
+      font-size: 24px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin: 0 0 12px;
+    }
+    @media (min-width: 768px) {
+      .hero-title {
+        font-size: 28px;
+      }
+    }
+    .hero-desc {
+      max-width: 520px;
+      font-size: 13px;
+      opacity: 0.8;
+      line-height: 1.7;
+    }
+
+    /* ========== TABS ========== */
     .tabs {
       display: flex;
-      border-bottom: 1px solid #1f1f1f;
       overflow-x: auto;
       white-space: nowrap;
+      border-bottom: 1px solid #1e1e1e;
       scrollbar-width: none;
     }
     .tabs::-webkit-scrollbar { display: none; }
 
     .tab {
       position: relative;
-      padding: 14px 20px;
+      padding: 14px 18px;
       font-size: 12px;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
       cursor: pointer;
-      opacity: 0.7;
-      transition: 0.3s;
+      opacity: 0.55;
+      transition: opacity .3s;
+      flex: 0 0 auto;
     }
-    .tab:hover { opacity: 1; }
-    .tab.active { opacity: 1; font-weight: 600; }
-
-    /* 底線動畫 */
+    .tab span {
+      display: block;
+    }
+    .tab small {
+      display: block;
+      margin-top: 2px;
+      font-size: 10px;
+      opacity: .7;
+      text-transform: none;
+      letter-spacing: .06em;
+    }
+    .tab:hover { opacity: .9; }
+    .tab.active {
+      opacity: 1;
+      font-weight: 600;
+    }
     .tab::after {
       content: "";
       position: absolute;
@@ -91,274 +149,426 @@
       left: 50%;
       width: 0%;
       height: 2px;
-      background: #fff;
-      transition: 0.3s;
+      background: #f5f5f5;
       transform: translateX(-50%);
+      transition: width .35s;
     }
     .tab.active::after {
-      width: 38%;
+      width: 36%;
     }
 
-    /* ===== Works Grid ===== */
+    /* ========== WORKS GRID (上方卡片) ========== */
     .works-grid {
-      padding: 32px 0 10px;
+      padding: 28px 0 12px;
     }
     .grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 22px;
+      gap: 20px;
     }
     @media (min-width: 720px) {
       .grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
     }
 
     .card {
-      background: #121212;
-      border: 1px solid #1d1d1d;
+      background: #101010;
       border-radius: 10px;
+      border: 1px solid #222;
       overflow: hidden;
       cursor: pointer;
-      transition: transform 0.35s, box-shadow 0.35s;
+      transform: translateY(24px);
+      opacity: 0;
+      will-change: transform, opacity;
+      transition: transform .35s ease, box-shadow .35s ease;
     }
     .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 14px 30px rgba(0,0,0,.45);
+    }
+    .card-thumb {
+      aspect-ratio: 4 / 5;
+      background: #191919;
     }
     .card-body {
-      padding: 14px 16px 18px;
+      padding: 12px 14px 16px;
     }
     .card-title {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       margin-bottom: 6px;
     }
     .card-desc {
-      opacity: 0.75;
       font-size: 12px;
+      opacity: 0.75;
       margin-bottom: 10px;
     }
     .card-meta {
       font-size: 11px;
       opacity: 0.6;
-      letter-spacing: 0.12em;
+      letter-spacing: .12em;
       text-transform: uppercase;
     }
 
-    /* ===== Case List ===== */
+    /* ========== CASE LIST (詳細案例區) ========== */
     .case-list {
-      margin-top: 40px;
-      padding-bottom: 40px;
-      border-top: 1px solid #1d1d1d;
+      border-top: 1px solid #1e1e1e;
+      padding: 30px 0 40px;
     }
-
     .case {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      padding: 40px 0;
-      border-bottom: 1px solid #1d1d1d;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 18px;
+      padding: 34px 0;
+      border-bottom: 1px solid #1e1e1e;
+      transform: translateY(32px) skewY(3deg);
       opacity: 0;
-      transform: translateY(20px);
-      transition: 0.8s ease-out;
+      will-change: transform, opacity;
     }
-    @media (min-width: 720px) {
+    @media (min-width: 768px) {
       .case {
-        grid-template-columns: 360px 1fr;
+        grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+        align-items: center;
+      }
+      .case[data-dir="right"] {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 340px);
       }
     }
-
-    /* reveal active */
-    .case.reveal {
-      opacity: 1;
-      transform: translateY(0);
+    .case-thumb {
+      background: #111;
+      border-radius: 10px;
+      overflow: hidden;
     }
-
     .case-tag {
       font-size: 11px;
-      opacity: 0.7;
+      opacity: .7;
+      letter-spacing: .2em;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
     .case-title {
+      margin: 0 0 8px;
       font-size: 20px;
       font-weight: 700;
-      margin: 4px 0 10px;
     }
     .case-meta {
       font-size: 11px;
-      opacity: 0.55;
+      opacity: .6;
       margin-bottom: 10px;
     }
     .case-desc {
       font-size: 13px;
-      opacity: 0.9;
+      opacity: .9;
       line-height: 1.7;
     }
     .case-more {
       display: inline-flex;
       margin-top: 12px;
-      gap: 6px;
-      align-items: center;
       font-size: 11px;
-      letter-spacing: 0.15em;
       text-transform: uppercase;
-      opacity: 0.7;
+      letter-spacing: .18em;
+      opacity: .7;
+      align-items: center;
+      gap: 6px;
     }
     .case-more::after {
       content: "→";
       font-size: 12px;
     }
 
-    /* ===== Footer ===== */
+    /* ========== FOOTER ========== */
     footer {
-      border-top: 1px solid #1d1d1d;
-      padding: 40px 0 20px;
-      margin-top: 40px;
+      border-top: 1px solid #1e1e1e;
+      padding: 26px 0 18px;
+      font-size: 11px;
+      letter-spacing: .12em;
       text-align: center;
-      opacity: 0.75;
-      font-size: 12px;
-      letter-spacing: 0.1em;
+      opacity: .7;
+      text-transform: uppercase;
     }
   </style>
 </head>
-
 <body>
 
-<!-- HEADER -->
-<header>
-  <div class="wrap">
-    <div class="logo">TRIG STUDIO</div>
-  </div>
-</header>
-
-<!-- Title -->
-<section class="section-header">
-  <div class="wrap">
-    <h1>WORKS / 作品集</h1>
-    <p>Visual Identity · Branding · Web</p>
-  </div>
-</section>
-
-<!-- Tabs -->
-<div class="tabs wrap">
-  <div class="tab active">視覺識別</div>
-  <div class="tab">包裝設計</div>
-  <div class="tab">網站設計</div>
-  <div class="tab">Campaign</div>
-  <div class="tab">其他專案</div>
-</div>
-
-<!-- Works Grid -->
-<section class="works-grid">
-  <div class="wrap">
-    <div class="grid">
-
-      <!-- Card 1 -->
-      <div class="card">
-        <img src="images/work-01.jpg" alt="">
-        <div class="card-body">
-          <div class="card-title">VI 設計是什麼？</div>
-          <div class="card-desc">以極簡白色瓶身為主體，透過光線、材質與比例建立品牌第一印象。</div>
-          <div class="card-meta">Visual Identity · 2024</div>
+  <!-- HEADER -->
+  <header>
+    <div class="wrap">
+      <div class="header-inner">
+        <div>
+          <div class="logo">TRIG STUDIO</div>
+          <span class="logo-sub">VISUAL IDENTITY & BRAND SYSTEM</span>
         </div>
       </div>
+      <div class="nav-line"></div>
+    </div>
+  </header>
 
-      <!-- Card 2 -->
-      <div class="card">
-        <img src="images/work-02.jpg" alt="">
-        <div class="card-body">
-          <div class="card-title">色塊系列視覺</div>
-          <div class="card-desc">利用玻璃透光與色塊堆疊，打造富節奏感的識別延伸。</div>
-          <div class="card-meta">Visual Identity · 2023</div>
-        </div>
-      </div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="wrap hero-inner">
+      <div class="hero-kicker">STUDIO ARCHIVE</div>
+      <h1 class="hero-title">WORKS / 作品集</h1>
+      <p class="hero-desc">
+        收錄 TRIG STUDIO 近期完成的品牌與視覺識別專案。從 Logo、影像風格到網站視覺，
+        我們專注在建立清晰、易被記住的品牌語言，讓每一次被看見都更有力度。
+      </p>
+    </div>
+  </section>
 
-      <!-- Card 3 -->
-      <div class="card">
-        <img src="images/work-03.jpg" alt="">
-        <div class="card-body">
-          <div class="card-title">LOGO 延伸應用</div>
-          <div class="card-desc">以多層背景與產品影像組合，讓品牌於不同媒介保持視覺一致。</div>
-          <div class="card-meta">Identity · 2022</div>
-        </div>
-      </div>
-
+  <!-- TABS -->
+  <div class="tabs wrap">
+    <div class="tab active">
+      <span>視覺識別</span>
+      <small>Visual Identity</small>
+    </div>
+    <div class="tab">
+      <span>包裝設計</span>
+      <small>Packaging</small>
+    </div>
+    <div class="tab">
+      <span>網站設計</span>
+      <small>Web Design</small>
+    </div>
+    <div class="tab">
+      <span>Campaign</span>
+      <small>Launch / Activation</small>
+    </div>
+    <div class="tab">
+      <span>其他專案</span>
+      <small>Print / Motion</small>
     </div>
   </div>
-</section>
 
-<!-- Case List -->
-<section class="case-list">
-  <div class="wrap">
+  <!-- WORKS GRID -->
+  <section class="works-grid">
+    <div class="wrap">
+      <div class="grid">
 
-    <div class="case">
-      <img src="images/case-01.jpg" alt="">
-      <div>
-        <div class="case-tag">CASE 01 · VISUAL IDENTITY</div>
-        <h2 class="case-title">VI 設計是什麼？</h2>
-        <div class="case-meta">客戶：保養品牌｜識別系統建立 · 品牌影像風格</div>
-        <p class="case-desc">
-          對於新創保養品牌而言，視覺識別不只是 Logo，而是一整套「被看見的語言」。
-          在本案中，我們以白色瓶身為主角，透過光線、材質與比例，讓產品在靜物照片中就能被記住。
-        </p>
-        <a class="case-more">read more</a>
+        <!-- Card 1 -->
+        <article class="card" data-target="#case-01">
+          <div class="card-thumb">
+            <img src="images/work-01.jpg" alt="VI 設計是什麼？">
+          </div>
+          <div class="card-body">
+            <div class="card-title">VI 設計是什麼？</div>
+            <div class="card-desc">
+              以極簡白色瓶身與深灰背景，建立新創保養品牌的乾淨識別語言。
+            </div>
+            <div class="card-meta">Visual Identity · 2024</div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card" data-target="#case-02">
+          <div class="card-thumb">
+            <img src="images/work-02.jpg" alt="日光色塊系列視覺">
+          </div>
+          <div class="card-body">
+            <div class="card-title">日光色塊系列視覺</div>
+            <div class="card-desc">
+              透過玻璃折射與柔和色塊，演繹「為自己留一塊日光」的品牌概念。
+            </div>
+            <div class="card-meta">Visual Identity · 2023</div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card" data-target="#case-03">
+          <div class="card-thumb">
+            <img src="images/work-03.jpg" alt="LOGO 延伸應用提案">
+          </div>
+          <div class="card-body">
+            <div class="card-title">LOGO 延伸應用</div>
+            <div class="card-desc">
+              不更動原有 Logo，透過版面與影像規則擴寫完整品牌系統。
+            </div>
+            <div class="card-meta">Brand System · 2022</div>
+          </div>
+        </article>
+
       </div>
     </div>
+  </section>
 
-    <div class="case">
-      <img src="images/case-02.jpg" alt="">
-      <div>
-        <div class="case-tag">CASE 02 · VISUAL IDENTITY</div>
-        <h2 class="case-title">色塊系列視覺</h2>
-        <div class="case-meta">客戶：生活選物店｜主視覺 · 展場物料</div>
-        <p class="case-desc">
-          以柔和的幾何色塊與玻璃折射，設計出可自由拆解、重組的視覺系統。
-          應用於品牌開幕活動、社群素材與線上宣傳。
-        </p>
-        <a class="case-more">read more</a>
-      </div>
+  <!-- CASE LIST -->
+  <section class="case-list">
+    <div class="wrap">
+
+      <!-- Case 1 -->
+      <article class="case" id="case-01" data-dir="left">
+        <div class="case-thumb">
+          <img src="images/case-01.jpg" alt="VI 設計是什麼？案例圖">
+        </div>
+        <div>
+          <div class="case-tag">CASE 01 · VISUAL IDENTITY</div>
+          <h2 class="case-title">VI 設計是什麼？</h2>
+          <div class="case-meta">
+            客戶產業：保養品牌｜服務內容：識別系統建立 · 影像風格定義
+          </div>
+          <p class="case-desc">
+            對於新創品牌而言，視覺識別不只是 Logo，而是一整套「被看見的語言」。
+            我們以白色瓶身為主角，透過光線與材質控制，在靜態畫面中建立可辨識的立體感，
+            讓產品在電商、社群與實體展示中都能被一眼看出。
+          </p>
+          <a href="#" class="case-more">read more</a>
+        </div>
+      </article>
+
+      <!-- Case 2 -->
+      <article class="case" id="case-02" data-dir="right">
+        <div class="case-thumb">
+          <img src="images/case-02.jpg" alt="日光色塊系列視覺案例圖">
+        </div>
+        <div>
+          <div class="case-tag">CASE 02 · VISUAL IDENTITY</div>
+          <h2 class="case-title">日光色塊系列視覺</h2>
+          <div class="case-meta">
+            客戶產業：生活選物店｜服務內容：主視覺 · 展場物料 · 社群版型
+          </div>
+          <p class="case-desc">
+            品牌核心是「在日常裡留一塊只屬於自己的時間」。我們以柔和色塊與玻璃折射作為主元素，
+            設計出一套可拆解、可延伸的視覺系統，應用在開幕活動、展場物料以及線上素材。
+          </p>
+          <a href="#" class="case-more">read more</a>
+        </div>
+      </article>
+
+      <!-- Case 3 -->
+      <article class="case" id="case-03" data-dir="left">
+        <div class="case-thumb">
+          <img src="images/case-03.jpg" alt="LOGO 延伸應用案例圖">
+        </div>
+        <div>
+          <div class="case-tag">CASE 03 · BRAND SYSTEM</div>
+          <h2 class="case-title">LOGO 延伸應用提案</h2>
+          <div class="case-meta">
+            客戶產業：設計工作室｜服務內容：識別優化 · 應用規範
+          </div>
+          <p class="case-desc">
+            在不更動客戶原有 Logo 的前提下，我們透過影像、版面與字體階層，建立可被團隊內部長期沿用的系統。
+            從名片、簡報模板到社群貼文，降低每一次重新設計的成本，同時維持視覺一致性。
+          </p>
+          <a href="#" class="case-more">read more</a>
+        </div>
+      </article>
+
     </div>
+  </section>
 
-    <div class="case">
-      <img src="images/case-03.jpg" alt="">
-      <div>
-        <div class="case-tag">CASE 03 · BRAND SYSTEM</div>
-        <h2 class="case-title">LOGO 延伸應用</h2>
-        <div class="case-meta">識別優化 · 視覺規範建立</div>
-        <p class="case-desc">
-          在不更動原 Logo 的前提下，我們以影像與排版規則，建立可持續使用的品牌延伸模組，
-          讓團隊內部更容易保持一致。
-        </p>
-        <a class="case-more">read more</a>
-      </div>
-    </div>
+  <!-- FOOTER -->
+  <footer>
+    © 2025 TRIG STUDIO · VISUAL IDENTITY & CREATIVE DIRECTION
+  </footer>
 
-  </div>
-</section>
+  <!-- ========== GSAPSCRIPTS ========== -->
+  <!-- GSAP 核心 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <!-- ScrollTrigger 插件 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-<footer>
-  © 2025 TRIG STUDIO — Visual Identity & Creative Direction
-</footer>
+  <script>
+    // 註冊 ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
 
-<!-- ===== Scroll Reveal JS ===== -->
-<script>
-  const cases = document.querySelectorAll('.case');
+    // ===== 進場動畫：LOGO / 線 / HERO =====
+    gsap.from(".logo", {
+      y: -18,
+      opacity: 0,
+      duration: 0.9,
+      ease: "power3.out"
+    });
 
-  const observer = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add('reveal');
+    gsap.from(".logo-sub", {
+      y: -10,
+      opacity: 0,
+      duration: 0.8,
+      delay: 0.1,
+      ease: "power3.out"
+    });
+
+    gsap.from(".nav-line", {
+      scaleX: 0,
+      duration: 1.1,
+      ease: "power3.out"
+    });
+
+    gsap.from(".hero-inner", {
+      y: 24,
+      opacity: 0,
+      duration: 1.0,
+      delay: 0.1,
+      ease: "power3.out"
+    });
+
+    // HERO 背景輕微視差
+    gsap.to(".hero-bg", {
+      yPercent: 15,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: true
       }
     });
-  },{
-    threshold: 0.12
-  });
 
-  cases.forEach(c=>observer.observe(c));
-</script>
+    // ===== 卡片區：Stagger 滑入 =====
+    gsap.set(".card", { opacity: 0, y: 24 });
 
+    ScrollTrigger.batch(".card", {
+      start: "top 80%",
+      onEnter: batch => {
+        gsap.to(batch, {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          stagger: 0.12
+        });
+      }
+    });
+
+    // ===== Case 區塊：左右交錯滑入+消除 skew =====
+    document.querySelectorAll(".case").forEach(caseEl => {
+      const dir = caseEl.dataset.dir === "right" ? 1 : -1;
+
+      gsap.fromTo(caseEl,
+        { 
+          opacity: 0,
+          y: 40,
+          x: 40 * dir,
+          skewY: 3 * dir
+        },
+        {
+          opacity: 1,
+          y: 0,
+          x: 0,
+          skewY: 0,
+          duration: 1.0,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: caseEl,
+            start: "top 80%",
+            once: true
+          }
+        }
+      );
+    });
+
+    // ===== 卡片點擊 → 捲動到對應案例 =====
+    document.querySelectorAll(".card").forEach(card => {
+      card.addEventListener("click", () => {
+        const target = card.getAttribute("data-target");
+        if (!target) return;
+        const el = document.querySelector(target);
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY - 90; // 預留 header 高度
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
