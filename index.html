@@ -45,13 +45,11 @@
       align-items: center;
       gap: 10px;
     }
-
     .logo-icon {
       width: 30px;
       height: 30px;
       display: block;
     }
-
     .logo-text-main {
       font-size: 24px;
       font-weight: 800;
@@ -181,6 +179,11 @@
       }
     }
 
+    a.card {
+      text-decoration: none;
+      color: inherit;
+    }
+
     .card {
       background: #101010;
       border-radius: 10px;
@@ -191,6 +194,7 @@
       opacity: 0;
       will-change: transform, opacity;
       transition: transform .35s ease, box-shadow .35s ease;
+      display: block;
     }
     .card:hover {
       transform: translateY(-4px) scale(1.01);
@@ -211,7 +215,6 @@
       overflow: hidden;
     }
 
-    /* 三個不同風格的示意作品圖 */
     .thumb-1 {
       background: radial-gradient(circle at 20% 20%, #ffffff33 0, transparent 55%),
                   linear-gradient(135deg, #111, #333);
@@ -418,14 +421,12 @@
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
   <div class="wrap">
     <div class="header-inner">
       <div class="logo-wrap">
-        <!-- 用 SVG 畫出的 TRIG LOGO：圓角三角形 + 中空圓 -->
+        <!-- TRIG LOGO -->
         <svg class="logo-icon" viewBox="0 0 100 100" aria-hidden="true">
-          <!-- 灰色圓角三角形 -->
           <path
             fill="#6f6f6f"
             d="M50 6
@@ -438,10 +439,8 @@
                Q7 73 10 68
                L42 11
                Q45 6 50 6Z" />
-          <!-- 中間挖空的圓（用白色表示洞口） -->
           <circle cx="50" cy="52" r="16" fill="#ffffff"/>
         </svg>
-
         <div>
           <div class="logo-text-main">TRIG STUDIO</div>
           <span class="logo-text-sub">VISUAL IDENTITY & BRAND SYSTEM</span>
@@ -452,7 +451,6 @@
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="wrap hero-inner">
@@ -465,7 +463,6 @@
   </div>
 </section>
 
-<!-- TABS -->
 <div class="tabs wrap">
   <div class="tab active">
     <span>視覺識別</span>
@@ -489,13 +486,12 @@
   </div>
 </div>
 
-<!-- WORKS GRID -->
 <section class="works-grid">
   <div class="wrap">
     <div class="grid">
 
-      <!-- Card 1 -->
-      <article class="card" data-target="#case-01">
+      <!-- 卡片 1：連到文章頁 -->
+      <a class="card" href="vi-article.html">
         <div class="card-thumb">
           <div class="thumb-inner thumb-1"></div>
         </div>
@@ -506,10 +502,10 @@
           </div>
           <div class="card-meta">Visual Identity · 2024</div>
         </div>
-      </article>
+      </a>
 
-      <!-- Card 2 -->
-      <article class="card" data-target="#case-02">
+      <!-- 卡片 2 -->
+      <div class="card">
         <div class="card-thumb">
           <div class="thumb-inner thumb-2"></div>
         </div>
@@ -520,10 +516,10 @@
           </div>
           <div class="card-meta">Visual Identity · 2023</div>
         </div>
-      </article>
+      </div>
 
-      <!-- Card 3 -->
-      <article class="card" data-target="#case-03">
+      <!-- 卡片 3 -->
+      <div class="card">
         <div class="card-thumb">
           <div class="thumb-inner thumb-3"></div>
         </div>
@@ -534,18 +530,16 @@
           </div>
           <div class="card-meta">Brand System · 2022</div>
         </div>
-      </article>
+      </div>
 
     </div>
   </div>
 </section>
 
-<!-- CASE LIST -->
 <section class="case-list">
   <div class="wrap">
 
-    <!-- Case 1 -->
-    <article class="case" id="case-01" data-dir="left">
+    <article class="case" data-dir="left">
       <div class="case-thumb">
         <div class="case-thumb-inner case-1"></div>
       </div>
@@ -560,12 +554,11 @@
           我們以白色瓶身為主角，透過光線與材質控制，在靜態畫面中建立可辨識的立體感，
           讓產品在電商、社群與實體展示中都能被一眼看出。
         </p>
-        <a href="#" class="case-more">read more</a>
+        <span class="case-more">read more</span>
       </div>
     </article>
 
-    <!-- Case 2 -->
-    <article class="case" id="case-02" data-dir="right">
+    <article class="case" data-dir="right">
       <div class="case-thumb">
         <div class="case-thumb-inner case-2"></div>
       </div>
@@ -579,12 +572,11 @@
           品牌核心是「在日常裡留一塊只屬於自己的時間」。我們以柔和色塊與玻璃折射作為主元素，
           設計出一套可拆解、可延伸的視覺系統，應用在開幕活動、展場物料以及線上素材。
         </p>
-        <a href="#" class="case-more">read more</a>
+        <span class="case-more">read more</span>
       </div>
     </article>
 
-    <!-- Case 3 -->
-    <article class="case" id="case-03" data-dir="left">
+    <article class="case" data-dir="left">
       <div class="case-thumb">
         <div class="case-thumb-inner case-3"></div>
       </div>
@@ -599,40 +591,29 @@
           建立可被團隊內部長期沿用的系統。從名片、簡報模板到社群貼文，
           降低每一次重新設計的成本，同時維持視覺一致性。
         </p>
-        <a href="#" class="case-more">read more</a>
+        <span class="case-more">read more</span>
       </div>
     </article>
 
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   © 2025 TRIG STUDIO · VISUAL IDENTITY & CREATIVE DIRECTION
 </footer>
 
-<!-- ========= GSAP ========= -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 <script>
   gsap.registerPlugin(ScrollTrigger);
 
-  // 進場：Logo & Hero
   gsap.from(".logo-icon", { opacity: 0, scale: 0.4, duration: 0.8, ease: "power3.out" });
   gsap.from(".logo-text-main", { y: -16, opacity: 0, duration: 0.9, ease: "power3.out" });
   gsap.from(".logo-text-sub", { y: -10, opacity: 0, duration: 0.8, delay: 0.1, ease: "power3.out" });
   gsap.from(".nav-line", { scaleX: 0, duration: 1.0, ease: "power3.out" });
+  gsap.from(".hero-inner", { y: 26, opacity: 0, duration: 1, delay: 0.1, ease: "power3.out" });
 
-  gsap.from(".hero-inner", {
-    y: 26,
-    opacity: 0,
-    duration: 1,
-    delay: 0.1,
-    ease: "power3.out"
-  });
-
-  // Hero 視差背景
   gsap.to(".hero-bg", {
     yPercent: 15,
     ease: "none",
@@ -644,7 +625,6 @@
     }
   });
 
-  // 卡片 grid 滾動顯示
   gsap.set(".card", { opacity: 0, y: 24 });
   ScrollTrigger.batch(".card", {
     start: "top 80%",
@@ -659,7 +639,6 @@
     }
   });
 
-  // Case 區塊 左右交錯滑入
   document.querySelectorAll(".case").forEach(caseEl => {
     const dir = caseEl.dataset.dir === "right" ? 1 : -1;
 
@@ -679,19 +658,6 @@
         }
       }
     );
-  });
-
-  // 卡片點擊 → 捲動到對應案例
-  document.querySelectorAll(".card").forEach(card => {
-    card.addEventListener("click", () => {
-      const target = card.getAttribute("data-target");
-      if (!target) return;
-      const el = document.querySelector(target);
-      if (el) {
-        const top = el.getBoundingClientRect().top + window.scrollY - 90;
-        window.scrollTo({ top, behavior: "smooth" });
-      }
-    });
   });
 </script>
 
