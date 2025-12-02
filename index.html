@@ -8,21 +8,13 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-
-    :root {
-      --fz-h1: 28px;
-      --fz-h2: 20px;
-      --fz-body: 14px;
-      --fz-meta: 11px;
-    }
-
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Noto Sans TC", sans-serif;
-      background: #050505;
-      color: #f5f5f5;
-      overflow-x: hidden;
+      background: #000;
+      color: #111;
     }
+    img { max-width: 100%; display: block; }
 
     .wrap {
       width: 100%;
@@ -31,758 +23,556 @@
       padding: 0 18px;
     }
 
-    /* ========= HEADER ========= */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid #1e1e1e;
+    /* ========== HEADER ========== */
+    .site-header {
+      background: #000;
+      color: #fff;
+      border-bottom: 1px solid #222;
     }
-    .header-inner {
+    .header-top {
+      padding: 8px 0 4px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      padding: 16px 0;
-    }
-
-    .logo-wrap {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .logo-icon {
-      width: 30px;
-      height: 30px;
-      display: block;
-    }
-    .logo-text-main {
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-    .logo-text-sub {
-      display: block;
       font-size: 10px;
-      letter-spacing: 0.22em;
-      opacity: 0.65;
-      text-transform: uppercase;
-      margin-top: 2px;
-    }
-    @media (max-width: 480px) {
-      .logo-text-main { font-size: 20px; letter-spacing: 0.12em; }
-      .logo-text-sub { font-size: 9px; letter-spacing: 0.18em; }
-    }
-
-    .nav-line {
-      height: 1px;
-      background: linear-gradient(90deg, #f5f5f5, #444);
-      transform-origin: left;
-    }
-
-    /* ========= HERO ========= */
-    .hero {
-      position: relative;
-      padding: 44px 0 30px;
-      border-bottom: 1px solid #1e1e1e;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      opacity: 0.25;
-      background:
-        radial-gradient(circle at 20% 0, #ffffff18 0, transparent 55%),
-        radial-gradient(circle at 80% 100%, #ffffff10 0, transparent 60%);
-      mix-blend-mode: screen;
-      pointer-events: none;
-    }
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-    }
-    .hero-kicker {
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      opacity: 0.6;
-      margin-bottom: 8px;
-    }
-    .hero-title {
-      font-size: var(--fz-h1);
-      margin: 0 0 10px;
-      letter-spacing: 0.22em;
+      letter-spacing: .16em;
       text-transform: uppercase;
     }
-    .hero-desc {
-      max-width: 560px;
-      font-size: var(--fz-body);
-      line-height: 1.7;
-      opacity: 0.8;
-    }
-    @media (min-width: 768px) {
-      .hero-title { font-size: 30px; }
-    }
-
-    /* ========= HERO VISUAL ========= */
-    .hero-visual {
-      padding: 16px 0 32px;
-      border-bottom: 1px solid #1e1e1e;
-    }
-    .hero-visual-box {
-      border-radius: 16px;
-      height: 220px;
-      background:
-        radial-gradient(circle at 20% 30%, #ffb36a55 0, transparent 45%),
-        radial-gradient(circle at 70% 60%, #6ad1ff55 0, transparent 50%),
-        linear-gradient(135deg, #111, #2a2a2a);
-      overflow: hidden;
-      position: relative;
-    }
-    .hero-visual-box::after {
-      content: "";
-      position: absolute;
-      inset: 18% 60% 18% 10%;
-      border-radius: 999px;
-      background: linear-gradient(180deg, #f5f5f5, #d0d0d0);
-      box-shadow: 0 26px 60px rgba(0,0,0,.9);
-    }
-    @media (min-width: 900px) {
-      .hero-visual-box { height: 320px; }
-    }
-
-    /* ========= TABS ========= */
-    .tabs {
+    .header-top-left {
       display: flex;
-      overflow-x: auto;
-      white-space: nowrap;
-      border-bottom: 1px solid #1e1e1e;
-      scrollbar-width: none;
+      align-items: center;
+      gap: 8px;
     }
-    .tabs::-webkit-scrollbar { display: none; }
-
-    .tab {
-      position: relative;
-      padding: 10px 18px;
-      font-size: 12px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      cursor: pointer;
-      opacity: 0.55;
-      flex: 0 0 auto;
-      transition: opacity .25s, background .25s, color .25s, transform .25s;
-      border-radius: 999px;
-      margin: 8px 6px;
+    .mini-logo {
+      width: 14px;
+      height: 14px;
     }
-    .tab span { display: block; }
-    .tab small {
-      display: block;
-      margin-top: 3px;
-      font-size: 10px;
-      opacity: .7;
-      letter-spacing: .06em;
-      text-transform: none;
+    .header-main {
+      padding: 12px 0 18px;
     }
-    .tab:hover {
-      opacity: .9;
-      transform: translateY(-1px);
-    }
-    .tab.active {
-      opacity: 1;
-      font-weight: 600;
-      background: #181818;
-      color: #f5f5f5;
-    }
-    .tab::after {
-      content: "";
-      position: absolute;
-      bottom: -4px;
-      left: 50%;
-      width: 0%;
-      height: 2px;
-      background: #f5f5f5;
-      transform: translateX(-50%);
-      transition: width .35s;
-    }
-    .tab.active::after { width: 40%; }
-
-    /* ========= WORKS GRID ========= */
-    .works-grid {
-      padding: 10px 0 12px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-    @media (min-width: 720px) {
-      .grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-    }
-
-    a.card {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .card {
-      background: #101010;
-      border-radius: 10px;
-      border: 1px solid #222;
-      overflow: hidden;
-      cursor: pointer;
-      transform: translateY(24px);
-      opacity: 0;
-      will-change: transform, opacity;
-      transition: transform .35s ease, box-shadow .35s ease;
-      display: block;
-    }
-    .card:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 14px 30px rgba(0,0,0,.45);
-    }
-
-    .card-thumb {
-      aspect-ratio: 4 / 5;
-      position: relative;
-      overflow: hidden;
-    }
-    .thumb-inner {
-      width: 100%;
-      height: 100%;
-      border-radius: 14px;
-      margin: 12px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .thumb-1 {
-      background: radial-gradient(circle at 20% 20%, #ffffff33 0, transparent 55%),
-                  linear-gradient(135deg, #111, #333);
-    }
-    .thumb-1::before {
-      content: "";
-      position: absolute;
-      inset: 18%;
-      border-radius: 999px;
-      background: linear-gradient(180deg, #f5f5f5, #d0d0d0);
-      box-shadow: 0 14px 30px rgba(0,0,0,.7);
-    }
-
-    .thumb-2 {
-      background:
-        radial-gradient(circle at 20% 30%, #ffb36a55 0, transparent 40%),
-        radial-gradient(circle at 70% 50%, #6ad1ff55 0, transparent 45%),
-        radial-gradient(circle at 40% 80%, #ff6acb55 0, transparent 45%),
-        linear-gradient(135deg, #111, #2a2a2a);
-    }
-    .thumb-2::before {
-      content: "";
-      position: absolute;
-      inset: 24%;
-      border-radius: 999px;
-      background: linear-gradient(180deg, #fdfdfd, #d8d8d8);
-      box-shadow: 0 12px 26px rgba(0,0,0,.75);
-    }
-
-    .thumb-3 {
-      background:
-        repeating-linear-gradient(
-          90deg,
-          #1c1c1c 0,
-          #1c1c1c 4px,
-          #141414 4px,
-          #141414 8px
-        );
-    }
-    .thumb-3::before {
-      content: "";
-      position: absolute;
-      inset: 20%;
-      border-radius: 12px;
-      background: radial-gradient(circle at 30% 10%, #ffffff22 0, transparent 55%),
-                  linear-gradient(140deg, #f5f5f5, #bfbfbf);
-      box-shadow: 0 10px 24px rgba(0,0,0,.8);
-    }
-
-    .card-body {
-      padding: 12px 14px 16px;
-    }
-    .card-title {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-    .card-desc {
-      font-size: var(--fz-body);
-      opacity: 0.75;
-      margin-bottom: 10px;
-    }
-    .card-meta {
-      font-size: var(--fz-meta);
-      opacity: 0.6;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    /* ========= CASE LIST ========= */
-    .case-list {
-      border-top: 1px solid #1e1e1e;
-      padding: 30px 0 40px;
-    }
-    .case {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 18px;
-      padding: 34px 0;
-      border-bottom: 1px solid #1e1e1e;
-      transform: translateY(32px) skewY(3deg);
-      opacity: 0;
-      will-change: transform, opacity;
+    .header-main h1 {
+      margin: 0;
+      font-size: 40px;
+      letter-spacing: .2em;
+      font-weight: 800;
     }
     @media (min-width: 768px) {
-      .case {
-        grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
-        align-items: center;
-      }
-      .case[data-dir="right"] {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 340px);
+      .header-main h1 { font-size: 64px; }
+    }
+
+    /* ========== SECTION 1：上方作品卡 ========== */
+    main {
+      background: #fff;
+    }
+
+    .section-label {
+      background: #000;
+      color: #fff;
+      font-size: 13px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      padding: 10px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .section-label-left {
+      font-size: 13px;
+    }
+    .section-label-right {
+      font-size: 11px;
+      opacity: .7;
+    }
+
+    .project-area {
+      background: #fff;
+      padding: 22px 0 24px;
+      border-bottom: 1px solid #ddd;
+    }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    @media (max-width: 640px) {
+      .project-grid {
+        gap: 10px;
       }
     }
 
-    .case-thumb {
-      background: #111;
-      border-radius: 10px;
-      overflow: hidden;
+    .project-card {
+      background: #f9f9f9;
+      border: 1px solid #eee;
+      padding-bottom: 8px;
     }
-    .case-thumb-inner {
-      height: 100%;
-      min-height: 220px;
-      border-radius: 10px;
+    .project-thumb {
+      aspect-ratio: 3 / 4;
+      background: #333;
       position: relative;
       overflow: hidden;
     }
-    .case-1 {
+    /* 這邊是示意的瓶子＋色塊，你之後可以直接改成 <img> */
+    .project-thumb-inner {
+      position: absolute;
+      inset: 10%;
       background:
-        radial-gradient(circle at 15% 15%, #ffffff22 0, transparent 55%),
-        linear-gradient(145deg, #111, #2f2f2f);
+        radial-gradient(circle at 20% 25%, #ffb36a66 0, transparent 45%),
+        radial-gradient(circle at 70% 40%, #6ad1ff66 0, transparent 45%),
+        radial-gradient(circle at 40% 80%, #ff6acb66 0, transparent 45%),
+        linear-gradient(135deg, #111, #444);
     }
-    .case-1::before {
+    .project-thumb-inner::before {
       content: "";
       position: absolute;
-      inset: 18%;
+      inset: 18% 40%;
       border-radius: 999px;
-      background: linear-gradient(180deg, #f5f5f5, #d0d0d0);
-      box-shadow: 0 18px 40px rgba(0,0,0,.85);
-    }
-    .case-2 {
-      background:
-        radial-gradient(circle at 20% 20%, #ffb36a55 0, transparent 45%),
-        radial-gradient(circle at 75% 50%, #6ad1ff55 0, transparent 45%),
-        radial-gradient(circle at 40% 80%, #ff6acb55 0, transparent 45%),
-        linear-gradient(130deg, #101010, #2d2d2d);
-    }
-    .case-2::before {
-      content: "";
-      position: absolute;
-      inset: 24%;
-      border-radius: 999px;
-      background: linear-gradient(180deg, #fdfdfd, #d8d8d8);
-      box-shadow: 0 16px 34px rgba(0,0,0,.85);
-    }
-    .case-3 {
-      background:
-        repeating-linear-gradient(
-          90deg,
-          #1c1c1c 0,
-          #1c1c1c 6px,
-          #141414 6px,
-          #141414 12px
-        );
-    }
-    .case-3::before {
-      content: "";
-      position: absolute;
-      inset: 18%;
-      border-radius: 16px;
-      background:
-        radial-gradient(circle at 30% 0%, #ffffff26 0, transparent 60%),
-        linear-gradient(140deg, #f5f5f5, #bfbfbf);
-      box-shadow: 0 16px 34px rgba(0,0,0,.9);
+      background: linear-gradient(180deg, #fdfdfd, #d2d2d2);
+      box-shadow: 0 14px 28px rgba(0,0,0,.7);
     }
 
-    .case-tag {
-      font-size: var(--fz-meta);
-      opacity: .7;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
-    .case-title {
-      margin: 0 0 8px;
-      font-size: var(--fz-h2);
-      font-weight: 700;
-    }
-    .case-meta {
-      font-size: var(--fz-meta);
-      opacity: .6;
-      margin-bottom: 10px;
-    }
-    .case-desc {
-      font-size: var(--fz-body);
-      opacity: .9;
-      line-height: 1.7;
-    }
-    .case-more {
-      display: inline-flex;
-      margin-top: 12px;
+    .project-text {
+      padding: 8px 10px 10px;
       font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .18em;
+    }
+    .project-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .project-meta {
+      color: #777;
+      font-size: 10px;
+      margin-bottom: 4px;
+    }
+    .project-meta-en {
+      font-size: 10px;
+      color: #aaa;
+    }
+
+    /* ========== SECTION 2：黑底分類列 ========== */
+    .category-bar {
+      background: #000;
+      color: #fff;
+      border-top: 1px solid #222;
+      border-bottom: 1px solid #222;
+    }
+    .category-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 18px;
+      font-size: 11px;
+      border-top: 1px solid #222;
+    }
+    .category-label-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .category-index {
+      font-size: 10px;
       opacity: .7;
+    }
+    .category-cn {
+      font-size: 12px;
+    }
+    .category-en {
+      font-size: 11px;
+      opacity: .7;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    /* ========== SECTION 3：文章列表 ========== */
+    .article-section {
+      background: #fff;
+      padding: 26px 0 32px;
+      border-bottom: 1px solid #ddd;
+    }
+    .article-list {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .article-item {
+      display: grid;
+      grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+      gap: 26px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 24px;
+    }
+    @media (max-width: 720px) {
+      .article-item {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .article-thumb {
+      background: #111;
+      aspect-ratio: 3 / 4;
+      position: relative;
+      overflow: hidden;
+    }
+    .article-thumb-inner {
+      position: absolute;
+      inset: 8%;
+      background:
+        radial-gradient(circle at 10% 5%, #ffffff33 0, transparent 60%),
+        linear-gradient(140deg, #222, #555);
+    }
+    .article-thumb-inner::before {
+      content: "";
+      position: absolute;
+      inset: 20% 42%;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #fdfdfd, #d2d2d2);
+      box-shadow: 0 18px 36px rgba(0,0,0,.85);
+    }
+
+    .article-meta-top {
+      font-size: 10px;
+      color: #999;
+      margin-bottom: 4px;
+    }
+    .article-meta-top span + span::before {
+      content: " / ";
+      margin: 0 3px;
+      color: #ccc;
+    }
+
+    .article-title {
+      font-size: 18px;
+      margin: 0 0 8px;
+    }
+    .article-excerpt {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.8;
+    }
+    .article-readmore {
+      margin-top: 18px;
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
+      color: #000;
+      text-decoration: none;
     }
-    .case-more::after {
+    .article-readmore::after {
       content: "→";
       font-size: 12px;
     }
 
-    /* ========= CTA ========= */
-    .contact-cta {
-      border-top: 1px solid #1e1e1e;
-      padding: 32px 0 40px;
-      text-align: center;
+    /* ========== SECTION 4：底部資訊區 ========== */
+    .bottom-contact {
+      background: #fff;
+      padding: 28px 0 24px;
+      border-bottom: 1px solid #ddd;
     }
-    .cta-label {
-      font-size: var(--fz-meta);
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      opacity: .7;
-      margin-bottom: 8px;
+    .bottom-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 20px;
+      align-items: center;
     }
-    .cta-title {
-      font-size: var(--fz-h2);
-      margin: 0 0 16px;
-    }
-    .cta-button {
-      display: inline-block;
-      padding: 10px 26px;
-      border-radius: 999px;
-      border: 1px solid #f5f5f5;
-      font-size: 12px;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: #f5f5f5;
-      transition: background .25s, color .25s, transform .2s;
-    }
-    .cta-button:hover {
-      background: #f5f5f5;
-      color: #050505;
-      transform: translateY(-1px);
+    @media (max-width: 720px) {
+      .bottom-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
-    /* ========= FOOTER ========= */
-    footer {
-      border-top: 1px solid #1e1e1e;
-      padding: 18px 0 18px;
-      font-size: var(--fz-meta);
-      letter-spacing: .12em;
+    .bottom-left-title {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    .bottom-info-line {
+      font-size: 12px;
+      border-bottom: 1px solid #444;
+      padding: 6px 0;
+    }
+
+    .bottom-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .triangle-logo {
+      width: 140px;
+      height: 140px;
+    }
+
+    /* ========== FOOTER NAV ========== */
+    .page-footer {
+      background: #000;
+      color: #fff;
+    }
+    .footer-nav {
+      display: flex;
+      align-items: stretch;
       text-align: center;
-      opacity: .7;
+      border-top: 1px solid #222;
+    }
+    .footer-btn {
+      flex: 1;
+      padding: 10px 0;
+      font-size: 12px;
+      border: none;
+      background: transparent;
+      color: #fff;
+      letter-spacing: .12em;
       text-transform: uppercase;
+    }
+    .footer-btn-center {
+      flex: 0 0 80px;
+      background: #111;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <div class="header-inner">
-      <div class="logo-wrap">
-        <svg class="logo-icon" viewBox="0 0 100 100" aria-hidden="true">
-          <path
-            fill="#6f6f6f"
-            d="M50 6
-               Q55 6 58 11
-               L90 68
-               Q93 73 90 79
-               Q87 85 80 85
-               L20 85
-               Q13 85 10 79
-               Q7 73 10 68
-               L42 11
-               Q45 6 50 6Z" />
-          <circle cx="50" cy="52" r="16" fill="#ffffff"/>
-        </svg>
-        <div>
-          <div class="logo-text-main">TRIG STUDIO</div>
-          <span class="logo-text-sub">VISUAL IDENTITY & BRAND SYSTEM</span>
-        </div>
-      </div>
+<!-- HEADER -->
+<header class="site-header">
+  <div class="wrap header-top">
+    <div class="header-top-left">
+      <!-- 小版 LOGO -->
+      <svg class="mini-logo" viewBox="0 0 100 100" aria-hidden="true">
+        <path
+          fill="#ffffff"
+          d="M50 6
+             Q55 6 58 11
+             L90 68
+             Q93 73 90 79
+             Q87 85 80 85
+             L20 85
+             Q13 85 10 79
+             Q7 73 10 68
+             L42 11
+             Q45 6 50 6Z" />
+        <circle cx="50" cy="52" r="18" fill="#000"/>
+      </svg>
+      <span>TRIG STUDIO</span>
     </div>
-    <div class="nav-line"></div>
+    <div>VISUAL IDENTITY</div>
+  </div>
+  <div class="wrap header-main">
+    <h1>TRIG STUDIO</h1>
   </div>
 </header>
 
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="wrap hero-inner">
-    <div class="hero-kicker">STUDIO ARCHIVE</div>
-    <h1 class="hero-title">WORKS / 作品集</h1>
-    <p class="hero-desc">
-      收錄 TRIG STUDIO 近期完成的品牌與視覺識別專案。從 Logo、影像風格到網站視覺，
-      我們專注在建立清晰、易被記住的品牌語言，讓每一次被看見都更有力度。
-    </p>
-  </div>
-</section>
+<main>
 
-<section class="hero-visual">
-  <div class="wrap">
-    <div class="hero-visual-box"></div>
+  <!-- 上方：視覺識別＋三張作品卡 -->
+  <div class="section-label">
+    <div class="section-label-left">視覺識別</div>
+    <div class="section-label-right">Visual identity</div>
   </div>
-</section>
 
-<div class="tabs wrap">
-  <div class="tab active" data-filter="all">
-    <span>全部作品</span>
-    <small>All / Visual Identity</small>
-  </div>
-  <div class="tab" data-filter="vi">
-    <span>視覺識別</span>
-    <small>Visual Identity</small>
-  </div>
-  <div class="tab" data-filter="packaging">
-    <span>包裝設計</span>
-    <small>Packaging</small>
-  </div>
-  <div class="tab" data-filter="web">
-    <span>網站設計</span>
-    <small>Web Design</small>
-  </div>
-  <div class="tab" data-filter="campaign">
-    <span>Campaign</span>
-    <small>Launch / Activation</small>
-  </div>
-</div>
+  <section class="project-area">
+    <div class="wrap">
+      <div class="project-grid">
 
-<section class="works-grid">
-  <div class="wrap">
-    <div class="grid">
-
-      <!-- 卡片 1：VI（也屬於 all） -->
-      <a class="card" href="vi-article.html" data-tag="vi">
-        <div class="card-thumb">
-          <div class="thumb-inner thumb-1"></div>
-        </div>
-        <div class="card-body">
-          <div class="card-title">VI 設計是什麼？</div>
-          <div class="card-desc">
-            以極簡白色瓶身與深灰背景，建立新創保養品牌的乾淨識別語言。
+        <!-- 卡片 1 -->
+        <article class="project-card">
+          <div class="project-thumb">
+            <div class="project-thumb-inner"></div>
           </div>
-          <div class="card-meta">Visual Identity · 2024</div>
-        </div>
-      </a>
-
-      <!-- 卡片 2：VI -->
-      <div class="card" data-tag="vi">
-        <div class="card-thumb">
-          <div class="thumb-inner thumb-2"></div>
-        </div>
-        <div class="card-body">
-          <div class="card-title">日光色塊系列視覺</div>
-          <div class="card-desc">
-            透過玻璃折射與柔和色塊，演繹「為自己留一塊日光」的品牌概念。
+          <div class="project-text">
+            <div class="project-title">VI設計是什麼？</div>
+            <div class="project-meta">2024 / 品牌識別專案</div>
+            <div class="project-meta-en">Visual Identity</div>
           </div>
-          <div class="card-meta">Visual Identity · 2023</div>
-        </div>
+        </article>
+
+        <!-- 卡片 2 -->
+        <article class="project-card">
+          <div class="project-thumb">
+            <div class="project-thumb-inner"></div>
+          </div>
+          <div class="project-text">
+            <div class="project-title">日光色塊視覺</div>
+            <div class="project-meta">2023 / 品牌主視覺</div>
+            <div class="project-meta-en">Visual Identity</div>
+          </div>
+        </article>
+
+        <!-- 卡片 3 -->
+        <article class="project-card">
+          <div class="project-thumb">
+            <div class="project-thumb-inner"></div>
+          </div>
+          <div class="project-text">
+            <div class="project-title">LOGO延伸應用</div>
+            <div class="project-meta">2022 / 品牌系統化</div>
+            <div class="project-meta-en">Visual Identity</div>
+          </div>
+        </article>
+
       </div>
-
-      <!-- 卡片 3：Brand System （先算在 campaign 類，之後你可以改） -->
-      <div class="card" data-tag="campaign">
-        <div class="card-thumb">
-          <div class="thumb-inner thumb-3"></div>
-        </div>
-        <div class="card-body">
-          <div class="card-title">LOGO 延伸應用</div>
-          <div class="card-desc">
-            不更動原有 Logo，透過版面與影像規則擴寫完整品牌系統。
-          </div>
-          <div class="card-meta">Brand System · 2022</div>
-        </div>
-      </div>
-
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="case-list">
-  <div class="wrap">
-
-    <article class="case" data-dir="left">
-      <div class="case-thumb">
-        <div class="case-thumb-inner case-1"></div>
+  <!-- 黑底分類列 -->
+  <section class="category-bar">
+    <div class="category-item">
+      <div class="category-label-left">
+        <span class="category-index">001</span>
+        <span class="category-cn">視覺識別</span>
       </div>
+      <div class="category-en">Visual identity</div>
+    </div>
+    <div class="category-item">
+      <div class="category-label-left">
+        <span class="category-index">002</span>
+        <span class="category-cn">包裝設計</span>
+      </div>
+      <div class="category-en">Packaging</div>
+    </div>
+    <div class="category-item">
+      <div class="category-label-left">
+        <span class="category-index">003</span>
+        <span class="category-cn">網站設計</span>
+      </div>
+      <div class="category-en">Web design</div>
+    </div>
+  </section>
+
+  <!-- 文章列表 -->
+  <section class="article-section">
+    <div class="wrap">
+      <div class="article-list">
+
+        <!-- 文章 1 -->
+        <article class="article-item">
+          <div class="article-thumb">
+            <div class="article-thumb-inner"></div>
+          </div>
+          <div>
+            <div class="article-meta-top">
+              <span>2024.05.20</span>
+              <span>TRIG STUDIO</span>
+            </div>
+            <h2 class="article-title">VI設計是什麼？</h2>
+            <p class="article-excerpt">
+              VI設計（Visual Identity）是品牌在視覺層面的完整語言，
+              從Logo、標準字、色彩系統到影像風格，透過一致的規劃，
+              讓消費者在不同接觸點中，都能一眼辨識並記住你的品牌。
+            </p>
+            <a href="#" class="article-readmore">read more</a>
+          </div>
+        </article>
+
+        <!-- 文章 2 -->
+        <article class="article-item">
+          <div class="article-thumb">
+            <div class="article-thumb-inner"></div>
+          </div>
+          <div>
+            <div class="article-meta-top">
+              <span>2023.12.08</span>
+              <span>TRIG STUDIO</span>
+            </div>
+            <h2 class="article-title">如何讓品牌照片看起來更有系統？</h2>
+            <p class="article-excerpt">
+              透過固定光線方向、構圖比例與背景質感，即使是不同主題的拍攝，
+              仍然能被整合為同一套品牌視覺，讓消費者對你的影像印象更深刻。
+            </p>
+            <a href="#" class="article-readmore">read more</a>
+          </div>
+        </article>
+
+        <!-- 文章 3 -->
+        <article class="article-item">
+          <div class="article-thumb">
+            <div class="article-thumb-inner"></div>
+          </div>
+          <div>
+            <div class="article-meta-top">
+              <span>2023.07.15</span>
+              <span>TRIG STUDIO</span>
+            </div>
+            <h2 class="article-title">從Logo到系統：品牌延伸應用的關鍵</h2>
+            <p class="article-excerpt">
+              好的Logo只是起點，關鍵在於如何把它延伸到名片、官網、
+              社群模板與實體空間，形成一個完整又好執行的識別系統。
+            </p>
+            <a href="#" class="article-readmore">read more</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 底部資訊區 -->
+  <section class="bottom-contact">
+    <div class="wrap bottom-inner">
       <div>
-        <div class="case-tag">CASE 01 · VISUAL IDENTITY</div>
-        <h2 class="case-title">VI 設計是什麼？</h2>
-        <div class="case-meta">
-          客戶產業：保養品牌｜服務內容：識別系統建立 · 影像風格定義
-        </div>
-        <p class="case-desc">
-          對於新創品牌而言，視覺識別不只是 Logo，而是一整套「被看見的語言」。
-          我們以白色瓶身為主角，透過光線與材質控制，在靜態畫面中建立可辨識的立體感，
-          讓產品在電商、社群與實體展示中都能被一眼看出。
-        </p>
-        <span class="case-more">read more</span>
+        <div class="bottom-left-title">夏邑</div>
+        <div class="bottom-info-line">contact@trigstudio.com</div>
+        <div class="bottom-info-line">+886 000 000 000</div>
+        <div class="bottom-info-line">TRIG STUDIO / Visual Identity Studio</div>
       </div>
-    </article>
+      <div class="bottom-logo">
+        <!-- 大三角 LOGO 示意 -->
+        <svg class="triangle-logo" viewBox="0 0 100 100" aria-hidden="true">
+          <!-- 外框三角 -->
+          <path d="M50 5 L95 85 H5 Z" fill="none" stroke="#000" stroke-width="1" />
+          <!-- 內圈圓點 -->
+          <!-- 第一排 -->
+          <circle cx="50" cy="22" r="4" fill="#000" />
+          <!-- 第二排 -->
+          <circle cx="37" cy="36" r="4" fill="#000" />
+          <circle cx="63" cy="36" r="4" fill="#000" />
+          <!-- 第三排 -->
+          <circle cx="30" cy="50" r="4" fill="#000" />
+          <circle cx="50" cy="50" r="4" fill="#000" />
+          <circle cx="70" cy="50" r="4" fill="#000" />
+          <!-- 第四排 -->
+          <circle cx="23" cy="64" r="4" fill="#000" />
+          <circle cx="42" cy="64" r="4" fill="#000" />
+          <circle cx="58" cy="64" r="4" fill="#000" />
+          <circle cx="77" cy="64" r="4" fill="#000" />
+        </svg>
+      </div>
+    </div>
+  </section>
 
-    <article class="case" data-dir="right">
-      <div class="case-thumb">
-        <div class="case-thumb-inner case-2"></div>
-      </div>
-      <div>
-        <div class="case-tag">CASE 02 · VISUAL IDENTITY</div>
-        <h2 class="case-title">日光色塊系列視覺</h2>
-        <div class="case-meta">
-          客戶產業：生活選物店｜服務內容：主視覺 · 展場物料 · 社群版型
-        </div>
-        <p class="case-desc">
-          品牌核心是「在日常裡留一塊只屬於自己的時間」。我們以柔和色塊與玻璃折射作為主元素，
-          設計出一套可拆解、可延伸的視覺系統，應用在開幕活動、展場物料以及線上素材。
-        </p>
-        <span class="case-more">read more</span>
-      </div>
-    </article>
+</main>
 
-    <article class="case" data-dir="left">
-      <div class="case-thumb">
-        <div class="case-thumb-inner case-3"></div>
-      </div>
-      <div>
-        <div class="case-tag">CASE 03 · BRAND SYSTEM</div>
-        <h2 class="case-title">LOGO 延伸應用提案</h2>
-        <div class="case-meta">
-          客戶產業：設計工作室｜服務內容：識別優化 · 應用規範
-        </div>
-        <p class="case-desc">
-          在不更動客戶原有 Logo 的前提下，我們透過影像、版面與字體階層，
-          建立可被團隊內部長期沿用的系統。從名片、簡報模板到社群貼文，
-          降低每一次重新設計的成本，同時維持視覺一致性。
-        </p>
-        <span class="case-more">read more</span>
-      </div>
-    </article>
-
+<!-- 底部 NAV -->
+<footer class="page-footer">
+  <div class="footer-nav">
+    <button class="footer-btn">三角點</button>
+    <button class="footer-btn footer-btn-center" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      ↑
+    </button>
+    <button class="footer-btn"></button>
   </div>
-</section>
-
-<section class="contact-cta">
-  <div class="wrap">
-    <p class="cta-label">NEXT PROJECT</p>
-    <h2 class="cta-title">想談談你的品牌視覺嗎？</h2>
-    <a href="mailto:hello@trigstudio.com" class="cta-button">Email us</a>
-  </div>
-</section>
-
-<footer>
-  © 2025 TRIG STUDIO · VISUAL IDENTITY & CREATIVE DIRECTION
 </footer>
 
+<!-- 簡單一點的進場動畫（可拿掉） -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
 <script>
-  gsap.registerPlugin(ScrollTrigger);
-
-  // 進場動畫
-  gsap.from(".logo-icon", { opacity: 0, scale: 0.4, duration: 0.8, ease: "power3.out" });
-  gsap.from(".logo-text-main", { y: -16, opacity: 0, duration: 0.9, ease: "power3.out" });
-  gsap.from(".logo-text-sub", { y: -10, opacity: 0, duration: 0.8, delay: 0.1, ease: "power3.out" });
-  gsap.from(".nav-line", { scaleX: 0, duration: 1.0, ease: "power3.out" });
-  gsap.from(".hero-inner", { y: 26, opacity: 0, duration: 1, delay: 0.1, ease: "power3.out" });
-
-  gsap.to(".hero-bg", {
-    yPercent: 15,
-    ease: "none",
-    scrollTrigger: {
-      trigger: ".hero",
-      start: "top top",
-      end: "bottom top",
-      scrub: true
-    }
-  });
-
-  gsap.from(".hero-visual-box", {
+  gsap.from(".header-main h1", { y: 20, opacity: 0, duration: 0.8, ease: "power3.out" });
+  gsap.from(".project-card", {
     opacity: 0,
-    y: 30,
-    duration: 1,
+    y: 20,
+    duration: 0.6,
+    stagger: 0.1,
     delay: 0.2,
     ease: "power3.out"
   });
-
-  // 卡片動畫
-  gsap.set(".card", { opacity: 0, y: 24 });
-  ScrollTrigger.batch(".card", {
-    start: "top 80%",
-    onEnter: batch => {
-      gsap.to(batch, {
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        ease: "power3.out",
-        stagger: 0.12
-      });
-    }
-  });
-
-  // Case 區塊動畫
-  document.querySelectorAll(".case").forEach(caseEl => {
-    const dir = caseEl.dataset.dir === "right" ? 1 : -1;
-
-    gsap.fromTo(caseEl,
-      { opacity: 0, y: 40, x: 40 * dir, skewY: 3 * dir },
-      {
-        opacity: 1,
-        y: 0,
-        x: 0,
-        skewY: 0,
-        duration: 1.0,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: caseEl,
-          start: "top 80%",
-          once: true
-        }
-      }
-    );
-  });
-
-  // Tabs 篩選
-  const tabs = document.querySelectorAll(".tab");
-  const cards = document.querySelectorAll(".works-grid .card");
-
-  tabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      tabs.forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-
-      const filter = tab.dataset.filter;
-      cards.forEach(card => {
-        const tag = card.dataset.tag;
-        if (filter === "all" || tag === filter) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
-        }
-      });
-    });
+  gsap.from(".article-item", {
+    scrollTrigger: {
+      trigger: ".article-section",
+      start: "top 80%"
+    },
+    opacity: 0,
+    y: 30,
+    duration: 0.7,
+    stagger: 0.15,
+    ease: "power3.out"
   });
 </script>
 
