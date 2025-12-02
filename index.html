@@ -8,6 +8,14 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
+    :root {
+      --fz-h1: 28px;
+      --fz-h2: 20px;
+      --fz-body: 14px;
+      --fz-meta: 11px;
+    }
+
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Noto Sans TC", sans-serif;
@@ -104,19 +112,46 @@
       margin-bottom: 8px;
     }
     .hero-title {
-      font-size: 24px;
+      font-size: var(--fz-h1);
       margin: 0 0 10px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
     }
     .hero-desc {
       max-width: 560px;
-      font-size: 13px;
+      font-size: var(--fz-body);
       line-height: 1.7;
       opacity: 0.8;
     }
     @media (min-width: 768px) {
-      .hero-title { font-size: 28px; }
+      .hero-title { font-size: 30px; }
+    }
+
+    /* ========= HERO VISUAL ========= */
+    .hero-visual {
+      padding: 16px 0 32px;
+      border-bottom: 1px solid #1e1e1e;
+    }
+    .hero-visual-box {
+      border-radius: 16px;
+      height: 220px;
+      background:
+        radial-gradient(circle at 20% 30%, #ffb36a55 0, transparent 45%),
+        radial-gradient(circle at 70% 60%, #6ad1ff55 0, transparent 50%),
+        linear-gradient(135deg, #111, #2a2a2a);
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-visual-box::after {
+      content: "";
+      position: absolute;
+      inset: 18% 60% 18% 10%;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #f5f5f5, #d0d0d0);
+      box-shadow: 0 26px 60px rgba(0,0,0,.9);
+    }
+    @media (min-width: 900px) {
+      .hero-visual-box { height: 320px; }
     }
 
     /* ========= TABS ========= */
@@ -131,14 +166,16 @@
 
     .tab {
       position: relative;
-      padding: 14px 18px;
+      padding: 10px 18px;
       font-size: 12px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       cursor: pointer;
       opacity: 0.55;
       flex: 0 0 auto;
-      transition: opacity .3s;
+      transition: opacity .25s, background .25s, color .25s, transform .25s;
+      border-radius: 999px;
+      margin: 8px 6px;
     }
     .tab span { display: block; }
     .tab small {
@@ -149,12 +186,20 @@
       letter-spacing: .06em;
       text-transform: none;
     }
-    .tab:hover { opacity: .9; }
-    .tab.active { opacity: 1; font-weight: 600; }
+    .tab:hover {
+      opacity: .9;
+      transform: translateY(-1px);
+    }
+    .tab.active {
+      opacity: 1;
+      font-weight: 600;
+      background: #181818;
+      color: #f5f5f5;
+    }
     .tab::after {
       content: "";
       position: absolute;
-      bottom: 0;
+      bottom: -4px;
       left: 50%;
       width: 0%;
       height: 2px;
@@ -162,11 +207,11 @@
       transform: translateX(-50%);
       transition: width .35s;
     }
-    .tab.active::after { width: 36%; }
+    .tab.active::after { width: 40%; }
 
     /* ========= WORKS GRID ========= */
     .works-grid {
-      padding: 26px 0 12px;
+      padding: 10px 0 12px;
     }
     .grid {
       display: grid;
@@ -273,12 +318,12 @@
       margin-bottom: 6px;
     }
     .card-desc {
-      font-size: 12px;
+      font-size: var(--fz-body);
       opacity: 0.75;
       margin-bottom: 10px;
     }
     .card-meta {
-      font-size: 11px;
+      font-size: var(--fz-meta);
       opacity: 0.6;
       letter-spacing: .12em;
       text-transform: uppercase;
@@ -371,7 +416,7 @@
     }
 
     .case-tag {
-      font-size: 11px;
+      font-size: var(--fz-meta);
       opacity: .7;
       letter-spacing: .2em;
       text-transform: uppercase;
@@ -379,16 +424,16 @@
     }
     .case-title {
       margin: 0 0 8px;
-      font-size: 20px;
+      font-size: var(--fz-h2);
       font-weight: 700;
     }
     .case-meta {
-      font-size: 11px;
+      font-size: var(--fz-meta);
       opacity: .6;
       margin-bottom: 10px;
     }
     .case-desc {
-      font-size: 13px;
+      font-size: var(--fz-body);
       opacity: .9;
       line-height: 1.7;
     }
@@ -407,11 +452,46 @@
       font-size: 12px;
     }
 
+    /* ========= CTA ========= */
+    .contact-cta {
+      border-top: 1px solid #1e1e1e;
+      padding: 32px 0 40px;
+      text-align: center;
+    }
+    .cta-label {
+      font-size: var(--fz-meta);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      opacity: .7;
+      margin-bottom: 8px;
+    }
+    .cta-title {
+      font-size: var(--fz-h2);
+      margin: 0 0 16px;
+    }
+    .cta-button {
+      display: inline-block;
+      padding: 10px 26px;
+      border-radius: 999px;
+      border: 1px solid #f5f5f5;
+      font-size: 12px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #f5f5f5;
+      transition: background .25s, color .25s, transform .2s;
+    }
+    .cta-button:hover {
+      background: #f5f5f5;
+      color: #050505;
+      transform: translateY(-1px);
+    }
+
     /* ========= FOOTER ========= */
     footer {
       border-top: 1px solid #1e1e1e;
-      padding: 26px 0 18px;
-      font-size: 11px;
+      padding: 18px 0 18px;
+      font-size: var(--fz-meta);
       letter-spacing: .12em;
       text-align: center;
       opacity: .7;
@@ -425,7 +505,6 @@
   <div class="wrap">
     <div class="header-inner">
       <div class="logo-wrap">
-        <!-- TRIG LOGO -->
         <svg class="logo-icon" viewBox="0 0 100 100" aria-hidden="true">
           <path
             fill="#6f6f6f"
@@ -463,26 +542,32 @@
   </div>
 </section>
 
+<section class="hero-visual">
+  <div class="wrap">
+    <div class="hero-visual-box"></div>
+  </div>
+</section>
+
 <div class="tabs wrap">
-  <div class="tab active">
+  <div class="tab active" data-filter="all">
+    <span>全部作品</span>
+    <small>All / Visual Identity</small>
+  </div>
+  <div class="tab" data-filter="vi">
     <span>視覺識別</span>
     <small>Visual Identity</small>
   </div>
-  <div class="tab">
+  <div class="tab" data-filter="packaging">
     <span>包裝設計</span>
     <small>Packaging</small>
   </div>
-  <div class="tab">
+  <div class="tab" data-filter="web">
     <span>網站設計</span>
     <small>Web Design</small>
   </div>
-  <div class="tab">
+  <div class="tab" data-filter="campaign">
     <span>Campaign</span>
     <small>Launch / Activation</small>
-  </div>
-  <div class="tab">
-    <span>其他專案</span>
-    <small>Print / Motion</small>
   </div>
 </div>
 
@@ -490,8 +575,8 @@
   <div class="wrap">
     <div class="grid">
 
-      <!-- 卡片 1：連到文章頁 -->
-      <a class="card" href="vi-article.html">
+      <!-- 卡片 1：VI（也屬於 all） -->
+      <a class="card" href="vi-article.html" data-tag="vi">
         <div class="card-thumb">
           <div class="thumb-inner thumb-1"></div>
         </div>
@@ -504,8 +589,8 @@
         </div>
       </a>
 
-      <!-- 卡片 2 -->
-      <div class="card">
+      <!-- 卡片 2：VI -->
+      <div class="card" data-tag="vi">
         <div class="card-thumb">
           <div class="thumb-inner thumb-2"></div>
         </div>
@@ -518,8 +603,8 @@
         </div>
       </div>
 
-      <!-- 卡片 3 -->
-      <div class="card">
+      <!-- 卡片 3：Brand System （先算在 campaign 類，之後你可以改） -->
+      <div class="card" data-tag="campaign">
         <div class="card-thumb">
           <div class="thumb-inner thumb-3"></div>
         </div>
@@ -598,6 +683,14 @@
   </div>
 </section>
 
+<section class="contact-cta">
+  <div class="wrap">
+    <p class="cta-label">NEXT PROJECT</p>
+    <h2 class="cta-title">想談談你的品牌視覺嗎？</h2>
+    <a href="mailto:hello@trigstudio.com" class="cta-button">Email us</a>
+  </div>
+</section>
+
 <footer>
   © 2025 TRIG STUDIO · VISUAL IDENTITY & CREATIVE DIRECTION
 </footer>
@@ -608,6 +701,7 @@
 <script>
   gsap.registerPlugin(ScrollTrigger);
 
+  // 進場動畫
   gsap.from(".logo-icon", { opacity: 0, scale: 0.4, duration: 0.8, ease: "power3.out" });
   gsap.from(".logo-text-main", { y: -16, opacity: 0, duration: 0.9, ease: "power3.out" });
   gsap.from(".logo-text-sub", { y: -10, opacity: 0, duration: 0.8, delay: 0.1, ease: "power3.out" });
@@ -625,6 +719,15 @@
     }
   });
 
+  gsap.from(".hero-visual-box", {
+    opacity: 0,
+    y: 30,
+    duration: 1,
+    delay: 0.2,
+    ease: "power3.out"
+  });
+
+  // 卡片動畫
   gsap.set(".card", { opacity: 0, y: 24 });
   ScrollTrigger.batch(".card", {
     start: "top 80%",
@@ -639,6 +742,7 @@
     }
   });
 
+  // Case 區塊動畫
   document.querySelectorAll(".case").forEach(caseEl => {
     const dir = caseEl.dataset.dir === "right" ? 1 : -1;
 
@@ -658,6 +762,27 @@
         }
       }
     );
+  });
+
+  // Tabs 篩選
+  const tabs = document.querySelectorAll(".tab");
+  const cards = document.querySelectorAll(".works-grid .card");
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      tabs.forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+
+      const filter = tab.dataset.filter;
+      cards.forEach(card => {
+        const tag = card.dataset.tag;
+        if (filter === "all" || tag === filter) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    });
   });
 </script>
 
