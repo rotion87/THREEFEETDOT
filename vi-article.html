@@ -8,6 +8,14 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
+    :root {
+      --fz-h1: 22px;
+      --fz-h2: 20px;
+      --fz-body: 14px;
+      --fz-meta: 11px;
+    }
+
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Noto Sans TC", sans-serif;
@@ -15,8 +23,6 @@
       color: #111111;
       overflow-x: hidden;
     }
-    img { max-width: 100%; display: block; }
-
     .wrap {
       width: 100%;
       max-width: 1040px;
@@ -24,11 +30,21 @@
       padding: 0 18px;
     }
 
-    /* ===== HEADER（沿用 TRIG LOGO）===== */
+    /* 進度條 */
+    #read-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 0;
+      background: #111;
+      z-index: 50;
+    }
+
     header {
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 40;
       background: rgba(255,255,255,0.96);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid #e2e2e2;
@@ -74,10 +90,10 @@
       text-transform: uppercase;
       color: #666;
       text-decoration: none;
+      white-space: nowrap;
     }
     .article-back:hover { color: #111; }
 
-    /* ===== HERO TITLE ===== */
     .article-hero {
       padding: 28px 0 18px;
       border-bottom: 1px solid #e2e2e2;
@@ -88,20 +104,17 @@
       color: #777;
       margin-bottom: 12px;
     }
-    .article-breadcrumb span {
-      margin-right: 8px;
-    }
+    .article-breadcrumb span { margin-right: 8px; }
     .article-title-main {
-      font-size: 18px;
+      font-size: var(--fz-h1);
       line-height: 1.7;
       margin: 0 0 6px;
     }
     .article-meta {
-      font-size: 11px;
+      font-size: var(--fz-meta);
       color: #999;
     }
 
-    /* ===== ARTICLE BODY ===== */
     .article-body {
       padding: 30px 0 60px;
       animation: fadeUp .7s ease-out .1s both;
@@ -111,7 +124,6 @@
       margin-bottom: 40px;
     }
 
-    /* 大章節標題（像你截圖那行「一 vi設計是什麼？」） */
     .section-heading {
       display: flex;
       align-items: center;
@@ -123,14 +135,10 @@
       font-weight: 300;
     }
     .section-heading-text {
-      font-size: 26px;
+      font-size: var(--fz-h2);
       font-weight: 500;
     }
-    @media (max-width: 640px) {
-      .section-heading-text { font-size: 20px; }
-    }
 
-    /* 小標題：左邊有黑色圓點 */
     .subheading {
       display: flex;
       align-items: center;
@@ -145,15 +153,12 @@
       border-radius: 999px;
       background: #111;
     }
-
     .article-paragraph {
-      font-size: 14px;
+      font-size: var(--fz-body);
       line-height: 2;
       color: #333;
       text-align: justify;
     }
-
-    /* 示意：黑色長條區塊（可以換成圖） */
     .article-banner {
       margin-top: 26px;
       border-radius: 4px;
@@ -164,12 +169,6 @@
       .article-banner { height: 160px; }
     }
 
-    /* 讓文字區域在大螢幕時置中偏上，閱讀比較舒服 */
-    @media (min-width: 1080px) {
-      .article-body { padding-bottom: 80px; }
-    }
-
-    /* ===== SIMPLE FADE ANIMATION ===== */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -178,11 +177,12 @@
 </head>
 <body>
 
+<div id="read-progress"></div>
+
 <header>
   <div class="wrap">
     <div class="header-inner">
       <div class="logo-wrap">
-        <!-- TRIG LOGO -->
         <svg class="logo-icon" viewBox="0 0 100 100" aria-hidden="true">
           <path
             fill="#6f6f6f"
@@ -204,14 +204,12 @@
         </div>
       </div>
 
-      <!-- 返回作品頁的連結，檔名可以改成你的列表頁 -->
       <a href="index.html" class="article-back">← BACK TO WORKS</a>
     </div>
   </div>
 </header>
 
 <main>
-  <!-- HERO -->
   <section class="article-hero">
     <div class="wrap">
       <div class="article-breadcrumb">
@@ -226,11 +224,9 @@
     </div>
   </section>
 
-  <!-- BODY -->
   <section class="article-body">
     <div class="wrap">
 
-      <!-- 第一段 -->
       <article class="article-section">
         <header class="section-heading">
           <div class="section-heading-index">一</div>
@@ -252,20 +248,25 @@
           一致而完整的視覺設計，更是一種策略性資產的建立。
         </p>
 
-        <!-- 黑色長條示意區，可以之後換成圖片 -->
         <div class="article-banner"></div>
       </article>
 
-      <!-- 之後可以繼續加「二、三、四…」章節 -->
-      <!--
-      <article class="article-section">
-        ...
-      </article>
-      -->
+      <!-- 之後可以繼續往下加「二、三、四…」的段落 -->
 
     </div>
   </section>
 </main>
+
+<script>
+  const bar = document.getElementById('read-progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrollTop = h.scrollTop || document.body.scrollTop;
+    const height = h.scrollHeight - h.clientHeight;
+    const percent = height ? (scrollTop / height) * 100 : 0;
+    bar.style.width = percent + '%';
+  });
+</script>
 
 </body>
 </html>
