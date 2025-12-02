@@ -65,7 +65,7 @@
       background: #fff;
     }
 
-    /* ========== SECTION LABEL（001 上方白條） ========== */
+    /* ========== 白底大標（放在每個 panel 上方） ========== */
     .section-label {
       background: #fff;
       color: #000;
@@ -77,19 +77,10 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid #ddd;
-      cursor: pointer;
+      cursor: default;
     }
     .section-label-left { font-size: 13px; }
     .section-label-right { font-size: 11px; opacity: .7; }
-
-    .section-label::after {
-      content: "＋";
-      font-size: 12px;
-      margin-left: 10px;
-    }
-    .section-label.active::after {
-      content: "－";
-    }
 
     /* ========== 共用：分類內容區（001–004 都用這種） ========== */
     .category-panel {
@@ -113,7 +104,6 @@
       padding: 14px 0 18px;
     }
 
-    /* 001 的內容：橫向滑作品卡 */
     .project-scroll,
     .category-scroll {
       display: flex;
@@ -191,7 +181,7 @@
       color: #aaa;
     }
 
-    /* ========== 黑底分類列（002–004 的標題列） ========== */
+    /* ========== 黑底分類列（001–004 的黑色長條） ========== */
     .category-bar {
       background: #000;
       color: #fff;
@@ -429,58 +419,15 @@
 
 <main>
 
-  <!-- 001：視覺識別（白條 + 展開區） -->
-  <div class="section-label category-trigger-top" data-panel="#cat-001">
-    <div class="section-label-left">001　視覺識別</div>
-    <div class="section-label-right">Visual identity</div>
-  </div>
-
-  <section id="cat-001" class="category-panel open">
-    <div class="wrap category-panel-inner">
-      <div class="project-scroll">
-
-        <!-- 卡片 1 -->
-        <article class="project-card">
-          <div class="project-thumb">
-            <div class="project-thumb-inner"></div>
-          </div>
-          <div class="project-text">
-            <div class="project-title">VI設計是什麼？</div>
-            <div class="project-meta">2024 / 品牌識別專案</div>
-            <div class="project-meta-en">Visual Identity</div>
-          </div>
-        </article>
-
-        <!-- 卡片 2 -->
-        <article class="project-card">
-          <div class="project-thumb">
-            <div class="project-thumb-inner"></div>
-          </div>
-          <div class="project-text">
-            <div class="project-title">日光色塊視覺</div>
-            <div class="project-meta">2023 / 品牌主視覺</div>
-            <div class="project-meta-en">Visual Identity</div>
-          </div>
-        </article>
-
-        <!-- 卡片 3 -->
-        <article class="project-card">
-          <div class="project-thumb">
-            <div class="project-thumb-inner"></div>
-          </div>
-          <div class="project-text">
-            <div class="project-title">LOGO延伸應用</div>
-            <div class="project-meta">2022 / 品牌系統化</div>
-            <div class="project-meta-en">Visual Identity</div>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- 002–004：黑底分類列 -->
+  <!-- 001–004：黑色長條分類列 -->
   <section class="category-bar">
+    <div class="category-item" data-panel="#cat-001">
+      <div class="category-label-left">
+        <span class="category-index">001</span>
+        <span class="category-cn">視覺識別</span>
+      </div>
+      <div class="category-en">Visual identity</div>
+    </div>
     <div class="category-item" data-panel="#cat-002">
       <div class="category-label-left">
         <span class="category-index">002</span>
@@ -504,8 +451,55 @@
     </div>
   </section>
 
-  <!-- 002 展開內容 -->
+  <!-- 001 panel -->
+  <section id="cat-001" class="category-panel">
+    <div class="section-label">
+      <div class="section-label-left">001　視覺識別</div>
+      <div class="section-label-right">Visual identity</div>
+    </div>
+    <div class="wrap category-panel-inner">
+      <div class="project-scroll">
+        <!-- 卡片們 -->
+        <article class="project-card">
+          <div class="project-thumb">
+            <div class="project-thumb-inner"></div>
+          </div>
+          <div class="project-text">
+            <div class="project-title">VI設計是什麼？</div>
+            <div class="project-meta">2024 / 品牌識別專案</div>
+            <div class="project-meta-en">Visual Identity</div>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-thumb">
+            <div class="project-thumb-inner"></div>
+          </div>
+          <div class="project-text">
+            <div class="project-title">日光色塊視覺</div>
+            <div class="project-meta">2023 / 品牌主視覺</div>
+            <div class="project-meta-en">Visual Identity</div>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-thumb">
+            <div class="project-thumb-inner"></div>
+          </div>
+          <div class="project-text">
+            <div class="project-title">LOGO延伸應用</div>
+            <div class="project-meta">2022 / 品牌系統化</div>
+            <div class="project-meta-en">Visual Identity</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 002 panel -->
   <section id="cat-002" class="category-panel">
+    <div class="section-label">
+      <div class="section-label-left">002　包裝設計</div>
+      <div class="section-label-right">Packaging</div>
+    </div>
     <div class="wrap category-panel-inner">
       <div class="category-scroll">
         <article class="project-card">
@@ -518,7 +512,6 @@
             <div class="project-meta-en">Packaging</div>
           </div>
         </article>
-
         <article class="project-card">
           <div class="project-thumb">
             <div class="project-thumb-inner"></div>
@@ -533,8 +526,12 @@
     </div>
   </section>
 
-  <!-- 003 展開內容 -->
+  <!-- 003 panel -->
   <section id="cat-003" class="category-panel">
+    <div class="section-label">
+      <div class="section-label-left">003　網站設計</div>
+      <div class="section-label-right">Web design</div>
+    </div>
     <div class="wrap category-panel-inner">
       <div class="category-scroll">
         <article class="project-card">
@@ -547,7 +544,6 @@
             <div class="project-meta-en">Web Design</div>
           </div>
         </article>
-
         <article class="project-card">
           <div class="project-thumb">
             <div class="project-thumb-inner"></div>
@@ -562,8 +558,12 @@
     </div>
   </section>
 
-  <!-- 004 展開內容 -->
+  <!-- 004 panel -->
   <section id="cat-004" class="category-panel">
+    <div class="section-label">
+      <div class="section-label-left">004　Campaign / 其他</div>
+      <div class="section-label-right">Campaign</div>
+    </div>
     <div class="wrap category-panel-inner">
       <div class="category-scroll">
         <article class="project-card">
@@ -576,7 +576,6 @@
             <div class="project-meta-en">Campaign</div>
           </div>
         </article>
-
         <article class="project-card">
           <div class="project-thumb">
             <div class="project-thumb-inner"></div>
@@ -591,7 +590,7 @@
     </div>
   </section>
 
-  <!-- 總覽（不分類，一直往下滑） -->
+  <!-- 總覽 -->
   <div class="overview-label wrap">
     總覽　Overview
   </div>
@@ -706,22 +705,21 @@
 <script>
   // ========== 分類展開 / 收合（001–004，只會開一個） ==========
   const panels = document.querySelectorAll('.category-panel');
-  const topTrigger = document.querySelector('.category-trigger-top');
-  const blackTriggers = document.querySelectorAll('.category-item');
-  const allTriggers = [topTrigger, ...blackTriggers];
+  const categoryItems = document.querySelectorAll('.category-item');
 
-  // 初始：001 是預設展開
-  topTrigger.classList.add('active');
-  const panel001 = document.querySelector('#cat-001');
-  panel001.classList.add('open');
-  panel001.style.maxHeight = panel001.scrollHeight + 'px';
+  // 初始：001 預設展開
+  const defaultTrigger = document.querySelector('.category-item[data-panel="#cat-001"]');
+  const defaultPanel = document.querySelector('#cat-001');
+  defaultTrigger.classList.add('active');
+  defaultPanel.classList.add('open');
+  defaultPanel.style.maxHeight = defaultPanel.scrollHeight + 'px';
 
   function closeAll() {
     panels.forEach(p => {
       p.classList.remove('open');
       p.style.maxHeight = '0px';
     });
-    allTriggers.forEach(t => t.classList.remove('active'));
+    categoryItems.forEach(t => t.classList.remove('active'));
   }
 
   function handleTriggerClick(trigger) {
@@ -730,7 +728,7 @@
     const isOpen = target.classList.contains('open');
 
     if (isOpen) {
-      // 點同一個 → 收起
+      // 點同一個 → 收起（如果你想「不能全部收光」再跟我說可調整）
       target.classList.remove('open');
       target.style.maxHeight = '0px';
       trigger.classList.remove('active');
@@ -745,19 +743,19 @@
     target.classList.add('open');
     target.style.maxHeight = target.scrollHeight + 'px';
 
-    // 展開時，滑動畫面到 trigger 附近
+    // 展開時，滑動畫面到黑色長條附近
     const rect = trigger.getBoundingClientRect();
     const offset = window.scrollY + rect.top - 60;
     window.scrollTo({ top: offset, behavior: 'smooth' });
 
-    // 讓新展開的 panel 裡的卡片依序出現（用延遲）
+    // 讓新展開 panel 的卡片依序出現
     const cards = target.querySelectorAll('.project-card');
     cards.forEach((card, index) => {
       card.style.transitionDelay = 0.05 * index + 's';
     });
   }
 
-  allTriggers.forEach(trigger => {
+  categoryItems.forEach(trigger => {
     trigger.addEventListener('click', () => handleTriggerClick(trigger));
   });
 
