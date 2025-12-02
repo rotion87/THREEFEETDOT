@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VI設計全攻略｜TRIG STUDIO</title>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Noto Sans TC", sans-serif;
+      background: #ffffff;
+      color: #111111;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+
+    .wrap {
+      width: 100%;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 18px;
+    }
+
+    /* ===== HEADER（沿用 TRIG LOGO）===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e2e2e2;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 0;
+    }
+    .logo-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-icon {
+      width: 26px;
+      height: 26px;
+      display: block;
+    }
+    .logo-text-main {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .logo-text-sub {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      opacity: 0.55;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    @media (max-width: 480px) {
+      .logo-text-main { font-size: 18px; letter-spacing: 0.12em; }
+      .logo-text-sub { font-size: 8px; }
+    }
+    .article-back {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #666;
+      text-decoration: none;
+    }
+    .article-back:hover { color: #111; }
+
+    /* ===== HERO TITLE ===== */
+    .article-hero {
+      padding: 28px 0 18px;
+      border-bottom: 1px solid #e2e2e2;
+      animation: fadeUp .7s ease-out both;
+    }
+    .article-breadcrumb {
+      font-size: 12px;
+      color: #777;
+      margin-bottom: 12px;
+    }
+    .article-breadcrumb span {
+      margin-right: 8px;
+    }
+    .article-title-main {
+      font-size: 18px;
+      line-height: 1.7;
+      margin: 0 0 6px;
+    }
+    .article-meta {
+      font-size: 11px;
+      color: #999;
+    }
+
+    /* ===== ARTICLE BODY ===== */
+    .article-body {
+      padding: 30px 0 60px;
+      animation: fadeUp .7s ease-out .1s both;
+    }
+    .article-section {
+      max-width: 760px;
+      margin-bottom: 40px;
+    }
+
+    /* 大章節標題（像你截圖那行「一 vi設計是什麼？」） */
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .section-heading-index {
+      font-size: 22px;
+      font-weight: 300;
+    }
+    .section-heading-text {
+      font-size: 26px;
+      font-weight: 500;
+    }
+    @media (max-width: 640px) {
+      .section-heading-text { font-size: 20px; }
+    }
+
+    /* 小標題：左邊有黑色圓點 */
+    .subheading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .subheading-bullet {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #111;
+    }
+
+    .article-paragraph {
+      font-size: 14px;
+      line-height: 2;
+      color: #333;
+      text-align: justify;
+    }
+
+    /* 示意：黑色長條區塊（可以換成圖） */
+    .article-banner {
+      margin-top: 26px;
+      border-radius: 4px;
+      background: #000;
+      height: 120px;
+    }
+    @media (min-width: 768px) {
+      .article-banner { height: 160px; }
+    }
+
+    /* 讓文字區域在大螢幕時置中偏上，閱讀比較舒服 */
+    @media (min-width: 1080px) {
+      .article-body { padding-bottom: 80px; }
+    }
+
+    /* ===== SIMPLE FADE ANIMATION ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="header-inner">
+      <div class="logo-wrap">
+        <!-- TRIG LOGO -->
+        <svg class="logo-icon" viewBox="0 0 100 100" aria-hidden="true">
+          <path
+            fill="#6f6f6f"
+            d="M50 6
+               Q55 6 58 11
+               L90 68
+               Q93 73 90 79
+               Q87 85 80 85
+               L20 85
+               Q13 85 10 79
+               Q7 73 10 68
+               L42 11
+               Q45 6 50 6Z" />
+          <circle cx="50" cy="52" r="16" fill="#ffffff"/>
+        </svg>
+        <div>
+          <div class="logo-text-main">TRIG STUDIO</div>
+          <span class="logo-text-sub">VISUAL IDENTITY & BRAND SYSTEM</span>
+        </div>
+      </div>
+
+      <!-- 返回作品頁的連結，檔名可以改成你的列表頁 -->
+      <a href="index.html" class="article-back">← BACK TO WORKS</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="article-hero">
+    <div class="wrap">
+      <div class="article-breadcrumb">
+        <span>WORKS</span> / <span>VI DESIGN</span>
+      </div>
+      <h1 class="article-title-main">
+        VI設計全攻略：深入解析CIS企業識別、LOGO設計、輔助圖形與商標註冊流程
+      </h1>
+      <div class="article-meta">
+        CASE 01 · Visual Identity ｜ 2024 · TRIG STUDIO
+      </div>
+    </div>
+  </section>
+
+  <!-- BODY -->
+  <section class="article-body">
+    <div class="wrap">
+
+      <!-- 第一段 -->
+      <article class="article-section">
+        <header class="section-heading">
+          <div class="section-heading-index">一</div>
+          <div class="section-heading-text">
+            vi設計是什麼？建立品牌視覺的一致性基礎
+          </div>
+        </header>
+
+        <h2 class="subheading">
+          <span class="subheading-bullet"></span>
+          <span>vi（Visual Identity）的定義與重要性</span>
+        </h2>
+
+        <p class="article-paragraph">
+          VI設計屬於CIS（Corporate Identity System，企業識別系統）中的一環，
+          主要聚焦在「視覺層面的呈現」，包括標誌（Logo）、標準字、色彩系統、
+          輔助圖形、影像風格等。一個完整的VI能夠有效傳達品牌個性與價值觀，
+          幫助消費者在眾多競品中快速辨識並記住品牌。對企業而言，
+          一致而完整的視覺設計，更是一種策略性資產的建立。
+        </p>
+
+        <!-- 黑色長條示意區，可以之後換成圖片 -->
+        <div class="article-banner"></div>
+      </article>
+
+      <!-- 之後可以繼續加「二、三、四…」章節 -->
+      <!--
+      <article class="article-section">
+        ...
+      </article>
+      -->
+
+    </div>
+  </section>
+</main>
+
+</body>
+</html>
